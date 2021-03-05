@@ -1,0 +1,7 @@
+[tool.black]
+exclude = '''
+/(
+  | grpc_async
+  | grpc_sync
+)/
+'''
