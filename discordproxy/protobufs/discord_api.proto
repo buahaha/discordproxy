@@ -1,0 +1,59 @@
+syntax = "proto3";
+
+package discord_api;
+
+message Channel {
+  uint64 id = 1;
+  enum Type {
+    GUILD_TEXT = 0;
+    GUILD_VOICE = 1;
+    GROUP_DM = 2;
+    GUILD_CATEGORY = 3;
+    GUILD_NEWS = 4;
+    PRODUCTS = 5;
+    GUILD_STORE = 6;
+  }
+  Type type = 2;
+  uint64 guild_id = 3;
+  int32 position = 4;
+  // tbd //
+  string name = 6;
+  string topic = 7;
+}
+
+message Thumbnail {
+  string url = 1;
+  string proxy_url = 2;
+  int32 height = 3;
+  int32 width = 4;
+}
+
+message Embed {
+  string title = 1;
+  string description = 2;
+  Thumbnail thumbnail = 3;
+}
+
+message DirectMessageRequest {
+  uint64 user_id = 1;
+  string content = 2;
+  Embed embed = 3;
+}
+
+message DiscordReply {
+  bool ok = 1;
+  string message = 2;
+}
+
+message GetGuildChannelsRequest {
+  uint64 guild_id = 1;
+}
+
+message GetGuildChannelsResponse {
+  repeated Channel channels = 1;
+}
+
+service DiscordApi {
+  rpc SendDirectMessage (DirectMessageRequest) returns (DiscordReply) {}
+  rpc GetGuildChannels (GetGuildChannelsRequest) returns (GetGuildChannelsResponse) {}
+}
