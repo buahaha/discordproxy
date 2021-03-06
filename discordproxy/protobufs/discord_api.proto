@@ -21,6 +21,7 @@ message Channel {
   string topic = 7;
 }
 
+
 message Thumbnail {
   string url = 1;
   string proxy_url = 2;

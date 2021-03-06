@@ -13,5 +13,5 @@ omit =
     setup.py
     */test*.py
     */tests/*.py
-    */grpc_api/*
+    *_pb2*.py
     doc/*

@@ -20,3 +20,52 @@ This is a proxy server that provides access to the Discord API via gRPC.
 The main purpose is to enable applications to use the Discord API without having to implement Discord's websocket protocol. Instead, they can use the gRPC API and the proxy will resolve all requests with the Discord API server via websockets or HTTP.
 
 Python applications can import the generated gRPC client directly. Applications in other languages can use the protobuf definition to generate their own gRPC client.
+
+## Example
+
+Here is an example for sending a direct message to user with ID 123:
+
+```python
+import grpc
+
+from discordproxy.discord_api_pb2 import DirectMessageRequest
+from discordproxy.discord_api_pb2_grpc import DiscordApiStub
+
+
+channel = grpc.insecure_channel("localhost:50051")
+client = DiscordApiStub(channel)
+request = DirectMessageRequest(user_id=123, content="This is the way")
+client.SendDirectMessage(request)
+
+```
+
+## Error handling
+
+Errors from the Discord API are usually HTTP exceptions and are mapped to gRPC exceptions.
+
+Here is an example on how to get details for errors from your gRPC calls:
+
+```python
+try:
+    client.SendDirectMessage(request)
+except grpc.RpcError as e:
+    print(e.args[0].code)
+    print(e.args[0].details)
+```
+
+gRPC exceptions have a code and a detail property. Discord errors will always have `code = grpc.StatusCode.ABORTED` and contain the actual Discord error in the detail property as JSON object, e.g. :
+
+```json
+{
+    "type": "HTTPException",
+    "status": 403,
+    "code": 50001,
+    "text": "Missing Access"
+}
+```
+
+Legend:
+
+- `status`: HTTP status code
+- `code`: JSON error code
+- `text`: Error message

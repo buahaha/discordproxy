@@ -30,17 +30,21 @@ async def run_server(token, my_args) -> None:
     try:
         await server.wait_for_termination()
         logger.info("gRPC server has shut down")
-    except KeyboardInterrupt:
+    except (SystemExit, KeyboardInterrupt):
         # Shuts down the server with 0 seconds of grace period. During the
         # grace period, the server won't accept new connections and allow
         # existing RPCs to continue within the grace period.
         await server.stop(0)
     finally:
-        logger.info("Logging out from Discord...")
         await discord_client.logout()
+        logger.info("Logged out from Discord")
 
 
 def main():
     print(f"{__title__} v{__version__}")
     print()
     asyncio.run(run_server(*setup_server(sys.argv[1:])))
+
+
+if __name__ == "__main__":
+    main()

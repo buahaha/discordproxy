@@ -1,22 +1,37 @@
-# import functools
+import functools
 
 import discord
 from google.protobuf import json_format
+import grpc
+import json
 
 from discordproxy import discord_api_pb2_grpc
 from discordproxy import discord_api_pb2
 
-# def handle_discord_exceptions(func):
-#     """converts discord HTTP exceptions into GRPC exceptions"""
 
-#     @functools.wraps(func)
-#     async def decorated(*args, **kwargs):
-#         try:
-#             return await func(*args, **kwargs)
-#         except discord.errors.DiscordException as ex:
-#             raise GRPCError(status=Status.ABORTED, message=str(ex))
+def handle_discord_exceptions(Response):
+    """converts discord HTTP exceptions into gRPC context"""
 
-#     return decorated
+    def wrapper(func):
+        @functools.wraps(func)
+        async def decorated(*args, **kwargs):
+            try:
+                return await func(*args, **kwargs)
+            except discord.errors.HTTPException as ex:
+                details = {
+                    "type": "HTTPException",
+                    "status": ex.status,
+                    "code": ex.code,
+                    "text": ex.text,
+                }
+                context = args[2]
+                context.set_code(grpc.StatusCode.ABORTED)
+                context.set_details(json.dumps(details))
+                return Response()
+
+        return decorated
+
+    return wrapper
 
 
 class DiscordApi(discord_api_pb2_grpc.DiscordApiServicer):
@@ -24,6 +39,7 @@ class DiscordApi(discord_api_pb2_grpc.DiscordApiServicer):
         super().__init__()
         self.discord_client = discord_client
 
+    @handle_discord_exceptions(discord_api_pb2.DiscordReply)
     async def SendDirectMessage(self, request, context):
         user = await self.discord_client.fetch_user(user_id=request.user_id)
         channel = await user.create_dm()
@@ -35,6 +51,7 @@ class DiscordApi(discord_api_pb2_grpc.DiscordApiServicer):
         await channel.send(content=request.content, embed=embed)
         return discord_api_pb2.DiscordReply(ok=True, message="looks good")
 
+    @handle_discord_exceptions(discord_api_pb2.GetGuildChannelsResponse)
     async def GetGuildChannels(self, request, context):
         guild = await self.discord_client.fetch_guild(request.guild_id)
         channels = await guild.fetch_channels()
