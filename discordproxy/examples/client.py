@@ -2,13 +2,13 @@ from random import randint
 
 import grpc
 
-from discordproxy.grpc_api.discord_api_pb2 import (
+from discordproxy.discord_api_pb2 import (
     DirectMessageRequest,
     Embed,
     # Thumbnail,
     GetGuildChannelsRequest,
 )
-from discordproxy.grpc_api.discord_api_pb2_grpc import DiscordApiStub
+from discordproxy.discord_api_pb2_grpc import DiscordApiStub
 
 
 def send_message():

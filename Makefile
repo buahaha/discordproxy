@@ -7,8 +7,8 @@ coverage:
 	coverage run -m unittest discover && coverage html && coverage report
 
 generate:
-	python -m grpc_tools.protoc -I discordproxy/protobufs --python_out=discordproxy/grpc_api --grpc_python_out=discordproxy/grpc_api discord_api.proto
-	sed -i -E 's/^import.*_pb2/from . \0/' discordproxy/grpc_api/*.py
+	python -m grpc_tools.protoc -I discordproxy/protobufs --python_out=discordproxy --grpc_python_out=discordproxy discord_api.proto
+	sed -i -E 's/^import.*_pb2/from . \0/' discordproxy/*_pb2*.py
 
 pylint:
 	pylint $(package)

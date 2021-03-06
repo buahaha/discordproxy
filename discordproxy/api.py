@@ -3,8 +3,8 @@
 import discord
 from google.protobuf import json_format
 
-from discordproxy.grpc_api import discord_api_pb2_grpc
-from discordproxy.grpc_api import discord_api_pb2
+from discordproxy import discord_api_pb2_grpc
+from discordproxy import discord_api_pb2
 
 # def handle_discord_exceptions(func):
 #     """converts discord HTTP exceptions into GRPC exceptions"""
