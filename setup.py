@@ -32,7 +32,7 @@ setup(
         "Programming Language :: Python :: 3.9",
     ],
     python_requires="~=3.7",
-    install_requires=["discord.py", "grpcio-tools", "grpclib"],
+    install_requires=["discord.py", "grpcio-tools"],
     entry_points={
         "console_scripts": [
             "discordproxyserver=discordproxy.server:main",

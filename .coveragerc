@@ -13,5 +13,5 @@ omit =
     setup.py
     */test*.py
     */tests/*.py
-    */migrations/*
+    */grpc_api/*
     doc/*

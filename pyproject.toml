@@ -2,6 +2,6 @@
 exclude = '''
 /(
   | grpc_async
-  | grpc_sync
+  | grpc_api
 )/
 '''

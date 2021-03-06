@@ -10,9 +10,9 @@ repos:
     hooks:
       - id: black
         language_version: python3.6
-        exclude: ^.*\bgrpc_.*sync\b.*$
+        exclude: ^.*\bgrpc_api\b.*$
   -   repo: https://gitlab.com/pycqa/flake8
       rev: '3.8.4'
       hooks:
       -   id: flake8
-          exclude: ^.*\bgrpc_.*sync\b.*$
+          exclude: ^.*\bgrpc_api\b.*$
