@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\x11\x64iscord_api.proto\x12\x0b\x64iscord_api\"\xf9\x01\n\x07\x43hannel\x12\n\n\x02id\x18\x01 \x01(\x04\x12\'\n\x04type\x18\x02 \x01(\x0e\x32\x19.discord_api.Channel.Type\x12\x10\n\x08guild_id\x18\x03 \x01(\x04\x12\x10\n\x08position\x18\x04 \x01(\x05\x12\x0c\n\x04name\x18\x06 \x01(\t\x12\r\n\x05topic\x18\x07 \x01(\t\"x\n\x04Type\x12\x0e\n\nGUILD_TEXT\x10\x00\x12\x0f\n\x0bGUILD_VOICE\x10\x01\x12\x0c\n\x08GROUP_DM\x10\x02\x12\x12\n\x0eGUILD_CATEGORY\x10\x03\x12\x0e\n\nGUILD_NEWS\x10\x04\x12\x0c\n\x08PRODUCTS\x10\x05\x12\x0f\n\x0bGUILD_STORE\x10\x06\"J\n\tThumbnail\x12\x0b\n\x03url\x18\x01 \x01(\t\x12\x11\n\tproxy_url\x18\x02 \x01(\t\x12\x0e\n\x06height\x18\x03 \x01(\x05\x12\r\n\x05width\x18\x04 \x01(\x05\"V\n\x05\x45mbed\x12\r\n\x05title\x18\x01 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x02 \x01(\t\x12)\n\tthumbnail\x18\x03 \x01(\x0b\x32\x16.discord_api.Thumbnail\"[\n\x14\x44irectMessageRequest\x12\x0f\n\x07user_id\x18\x01 \x01(\x04\x12\x0f\n\x07\x63ontent\x18\x02 \x01(\t\x12!\n\x05\x65mbed\x18\x03 \x01(\x0b\x32\x12.discord_api.Embed\"+\n\x0c\x44iscordReply\x12\n\n\x02ok\x18\x01 \x01(\x08\x12\x0f\n\x07message\x18\x02 \x01(\t\"+\n\x17GetGuildChannelsRequest\x12\x10\n\x08guild_id\x18\x01 \x01(\x04\"B\n\x18GetGuildChannelsResponse\x12&\n\x08\x63hannels\x18\x01 \x03(\x0b\x32\x14.discord_api.Channel2\xc4\x01\n\nDiscordApi\x12S\n\x11SendDirectMessage\x12!.discord_api.DirectMessageRequest\x1a\x19.discord_api.DiscordReply\"\x00\x12\x61\n\x10GetGuildChannels\x12$.discord_api.GetGuildChannelsRequest\x1a%.discord_api.GetGuildChannelsResponse\"\x00\x62\x06proto3'
+  serialized_pb=b'\n\x11\x64iscord_api.proto\x12\x0b\x64iscord_api\"\xf9\x01\n\x07\x43hannel\x12\n\n\x02id\x18\x01 \x01(\x04\x12\'\n\x04type\x18\x02 \x01(\x0e\x32\x19.discord_api.Channel.Type\x12\x10\n\x08guild_id\x18\x03 \x01(\x04\x12\x10\n\x08position\x18\x04 \x01(\x05\x12\x0c\n\x04name\x18\x06 \x01(\t\x12\r\n\x05topic\x18\x07 \x01(\t\"x\n\x04Type\x12\x0e\n\nGUILD_TEXT\x10\x00\x12\x0f\n\x0bGUILD_VOICE\x10\x01\x12\x0c\n\x08GROUP_DM\x10\x02\x12\x12\n\x0eGUILD_CATEGORY\x10\x03\x12\x0e\n\nGUILD_NEWS\x10\x04\x12\x0c\n\x08PRODUCTS\x10\x05\x12\x0f\n\x0bGUILD_STORE\x10\x06\"J\n\tThumbnail\x12\x0b\n\x03url\x18\x01 \x01(\t\x12\x11\n\tproxy_url\x18\x02 \x01(\t\x12\x0e\n\x06height\x18\x03 \x01(\x05\x12\r\n\x05width\x18\x04 \x01(\x05\"V\n\x05\x45mbed\x12\r\n\x05title\x18\x01 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x02 \x01(\t\x12)\n\tthumbnail\x18\x03 \x01(\x0b\x32\x16.discord_api.Thumbnail\"_\n\x18SendDirectMessageRequest\x12\x0f\n\x07user_id\x18\x01 \x01(\x04\x12\x0f\n\x07\x63ontent\x18\x02 \x01(\t\x12!\n\x05\x65mbed\x18\x03 \x01(\x0b\x32\x12.discord_api.Embed\"\x1b\n\x19SendDirectMessageResponse\"+\n\x17GetGuildChannelsRequest\x12\x10\n\x08guild_id\x18\x01 \x01(\x04\"B\n\x18GetGuildChannelsResponse\x12&\n\x08\x63hannels\x18\x01 \x03(\x0b\x32\x14.discord_api.Channel2\xd5\x01\n\nDiscordApi\x12\x64\n\x11SendDirectMessage\x12%.discord_api.SendDirectMessageRequest\x1a&.discord_api.SendDirectMessageResponse\"\x00\x12\x61\n\x10GetGuildChannels\x12$.discord_api.GetGuildChannelsRequest\x1a%.discord_api.GetGuildChannelsResponse\"\x00\x62\x06proto3'
 )
 
 
@@ -242,30 +242,30 @@ _EMBED = _descriptor.Descriptor(
 )
 
 
-_DIRECTMESSAGEREQUEST = _descriptor.Descriptor(
-  name='DirectMessageRequest',
-  full_name='discord_api.DirectMessageRequest',
+_SENDDIRECTMESSAGEREQUEST = _descriptor.Descriptor(
+  name='SendDirectMessageRequest',
+  full_name='discord_api.SendDirectMessageRequest',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='user_id', full_name='discord_api.DirectMessageRequest.user_id', index=0,
+      name='user_id', full_name='discord_api.SendDirectMessageRequest.user_id', index=0,
       number=1, type=4, cpp_type=4, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='content', full_name='discord_api.DirectMessageRequest.content', index=1,
+      name='content', full_name='discord_api.SendDirectMessageRequest.content', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='embed', full_name='discord_api.DirectMessageRequest.embed', index=2,
+      name='embed', full_name='discord_api.SendDirectMessageRequest.embed', index=2,
       number=3, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
@@ -284,32 +284,18 @@ _DIRECTMESSAGEREQUEST = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=450,
-  serialized_end=541,
+  serialized_end=545,
 )
 
 
-_DISCORDREPLY = _descriptor.Descriptor(
-  name='DiscordReply',
-  full_name='discord_api.DiscordReply',
+_SENDDIRECTMESSAGERESPONSE = _descriptor.Descriptor(
+  name='SendDirectMessageResponse',
+  full_name='discord_api.SendDirectMessageResponse',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   create_key=_descriptor._internal_create_key,
   fields=[
-    _descriptor.FieldDescriptor(
-      name='ok', full_name='discord_api.DiscordReply.ok', index=0,
-      number=1, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='message', full_name='discord_api.DiscordReply.message', index=1,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
   ],
   extensions=[
   ],
@@ -322,8 +308,8 @@ _DISCORDREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=543,
-  serialized_end=586,
+  serialized_start=547,
+  serialized_end=574,
 )
 
 
@@ -354,8 +340,8 @@ _GETGUILDCHANNELSREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=588,
-  serialized_end=631,
+  serialized_start=576,
+  serialized_end=619,
 )
 
 
@@ -386,20 +372,20 @@ _GETGUILDCHANNELSRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=633,
-  serialized_end=699,
+  serialized_start=621,
+  serialized_end=687,
 )
 
 _CHANNEL.fields_by_name['type'].enum_type = _CHANNEL_TYPE
 _CHANNEL_TYPE.containing_type = _CHANNEL
 _EMBED.fields_by_name['thumbnail'].message_type = _THUMBNAIL
-_DIRECTMESSAGEREQUEST.fields_by_name['embed'].message_type = _EMBED
+_SENDDIRECTMESSAGEREQUEST.fields_by_name['embed'].message_type = _EMBED
 _GETGUILDCHANNELSRESPONSE.fields_by_name['channels'].message_type = _CHANNEL
 DESCRIPTOR.message_types_by_name['Channel'] = _CHANNEL
 DESCRIPTOR.message_types_by_name['Thumbnail'] = _THUMBNAIL
 DESCRIPTOR.message_types_by_name['Embed'] = _EMBED
-DESCRIPTOR.message_types_by_name['DirectMessageRequest'] = _DIRECTMESSAGEREQUEST
-DESCRIPTOR.message_types_by_name['DiscordReply'] = _DISCORDREPLY
+DESCRIPTOR.message_types_by_name['SendDirectMessageRequest'] = _SENDDIRECTMESSAGEREQUEST
+DESCRIPTOR.message_types_by_name['SendDirectMessageResponse'] = _SENDDIRECTMESSAGERESPONSE
 DESCRIPTOR.message_types_by_name['GetGuildChannelsRequest'] = _GETGUILDCHANNELSREQUEST
 DESCRIPTOR.message_types_by_name['GetGuildChannelsResponse'] = _GETGUILDCHANNELSRESPONSE
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
@@ -425,19 +411,19 @@ Embed = _reflection.GeneratedProtocolMessageType('Embed', (_message.Message,), {
   })
 _sym_db.RegisterMessage(Embed)
 
-DirectMessageRequest = _reflection.GeneratedProtocolMessageType('DirectMessageRequest', (_message.Message,), {
-  'DESCRIPTOR' : _DIRECTMESSAGEREQUEST,
+SendDirectMessageRequest = _reflection.GeneratedProtocolMessageType('SendDirectMessageRequest', (_message.Message,), {
+  'DESCRIPTOR' : _SENDDIRECTMESSAGEREQUEST,
   '__module__' : 'discord_api_pb2'
-  # @@protoc_insertion_point(class_scope:discord_api.DirectMessageRequest)
+  # @@protoc_insertion_point(class_scope:discord_api.SendDirectMessageRequest)
   })
-_sym_db.RegisterMessage(DirectMessageRequest)
+_sym_db.RegisterMessage(SendDirectMessageRequest)
 
-DiscordReply = _reflection.GeneratedProtocolMessageType('DiscordReply', (_message.Message,), {
-  'DESCRIPTOR' : _DISCORDREPLY,
+SendDirectMessageResponse = _reflection.GeneratedProtocolMessageType('SendDirectMessageResponse', (_message.Message,), {
+  'DESCRIPTOR' : _SENDDIRECTMESSAGERESPONSE,
   '__module__' : 'discord_api_pb2'
-  # @@protoc_insertion_point(class_scope:discord_api.DiscordReply)
+  # @@protoc_insertion_point(class_scope:discord_api.SendDirectMessageResponse)
   })
-_sym_db.RegisterMessage(DiscordReply)
+_sym_db.RegisterMessage(SendDirectMessageResponse)
 
 GetGuildChannelsRequest = _reflection.GeneratedProtocolMessageType('GetGuildChannelsRequest', (_message.Message,), {
   'DESCRIPTOR' : _GETGUILDCHANNELSREQUEST,
@@ -462,16 +448,16 @@ _DISCORDAPI = _descriptor.ServiceDescriptor(
   index=0,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=702,
-  serialized_end=898,
+  serialized_start=690,
+  serialized_end=903,
   methods=[
   _descriptor.MethodDescriptor(
     name='SendDirectMessage',
     full_name='discord_api.DiscordApi.SendDirectMessage',
     index=0,
     containing_service=None,
-    input_type=_DIRECTMESSAGEREQUEST,
-    output_type=_DISCORDREPLY,
+    input_type=_SENDDIRECTMESSAGEREQUEST,
+    output_type=_SENDDIRECTMESSAGERESPONSE,
     serialized_options=None,
     create_key=_descriptor._internal_create_key,
   ),

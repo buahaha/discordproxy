@@ -84,25 +84,25 @@ class TestSendDirectMessage(AsyncTestCase):
     async def test_should_send_message_normally(self):
         # given
         my_api = api.DiscordApi(DiscordStub())
-        request = discord_api_pb2.DirectMessageRequest()
+        request = discord_api_pb2.SendDirectMessageRequest()
         request.user_id = 1001
         request.content = "content"
         # when
         result = await my_api.SendDirectMessage(request=request, context=MagicMock())
         # then
-        self.assertIsInstance(result, discord_api_pb2.DiscordReply)
+        self.assertIsInstance(result, discord_api_pb2.SendDirectMessageResponse)
 
     async def test_should_return_error_when_user_not_known(self):
         # given
         my_api = api.DiscordApi(DiscordStub())
-        request = discord_api_pb2.DirectMessageRequest()
+        request = discord_api_pb2.SendDirectMessageRequest()
         request.user_id = 666
         request.content = "content"
         context = ServicerContextStub()
         # when
         result = await my_api.SendDirectMessage(request, context)
         # then
-        self.assertEqual(result, discord_api_pb2.DiscordReply())
+        self.assertEqual(result, discord_api_pb2.SendDirectMessageResponse())
 
 
 # class TestPostDirectMessageView(AioHTTPTestCase):

@@ -6,7 +6,8 @@ from . import discord_api_pb2 as discord__api__pb2
 
 
 class DiscordApiStub(object):
-    """Missing associated documentation comment in .proto file."""
+    """Provides access to the Discord API
+    """
 
     def __init__(self, channel):
         """Constructor.
@@ -16,8 +17,8 @@ class DiscordApiStub(object):
         """
         self.SendDirectMessage = channel.unary_unary(
                 '/discord_api.DiscordApi/SendDirectMessage',
-                request_serializer=discord__api__pb2.DirectMessageRequest.SerializeToString,
-                response_deserializer=discord__api__pb2.DiscordReply.FromString,
+                request_serializer=discord__api__pb2.SendDirectMessageRequest.SerializeToString,
+                response_deserializer=discord__api__pb2.SendDirectMessageResponse.FromString,
                 )
         self.GetGuildChannels = channel.unary_unary(
                 '/discord_api.DiscordApi/GetGuildChannels',
@@ -27,16 +28,19 @@ class DiscordApiStub(object):
 
 
 class DiscordApiServicer(object):
-    """Missing associated documentation comment in .proto file."""
+    """Provides access to the Discord API
+    """
 
     def SendDirectMessage(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """Send a direct message to a user
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def GetGuildChannels(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """Get the list of channel for a guild
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
@@ -46,8 +50,8 @@ def add_DiscordApiServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'SendDirectMessage': grpc.unary_unary_rpc_method_handler(
                     servicer.SendDirectMessage,
-                    request_deserializer=discord__api__pb2.DirectMessageRequest.FromString,
-                    response_serializer=discord__api__pb2.DiscordReply.SerializeToString,
+                    request_deserializer=discord__api__pb2.SendDirectMessageRequest.FromString,
+                    response_serializer=discord__api__pb2.SendDirectMessageResponse.SerializeToString,
             ),
             'GetGuildChannels': grpc.unary_unary_rpc_method_handler(
                     servicer.GetGuildChannels,
@@ -62,7 +66,8 @@ def add_DiscordApiServicer_to_server(servicer, server):
 
  # This class is part of an EXPERIMENTAL API.
 class DiscordApi(object):
-    """Missing associated documentation comment in .proto file."""
+    """Provides access to the Discord API
+    """
 
     @staticmethod
     def SendDirectMessage(request,
@@ -76,8 +81,8 @@ class DiscordApi(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/discord_api.DiscordApi/SendDirectMessage',
-            discord__api__pb2.DirectMessageRequest.SerializeToString,
-            discord__api__pb2.DiscordReply.FromString,
+            discord__api__pb2.SendDirectMessageRequest.SerializeToString,
+            discord__api__pb2.SendDirectMessageResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 

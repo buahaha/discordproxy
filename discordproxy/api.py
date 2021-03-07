@@ -39,8 +39,10 @@ class DiscordApi(discord_api_pb2_grpc.DiscordApiServicer):
         super().__init__()
         self.discord_client = discord_client
 
-    @handle_discord_exceptions(discord_api_pb2.DiscordReply)
-    async def SendDirectMessage(self, request, context):
+    @handle_discord_exceptions(discord_api_pb2.SendDirectMessageResponse)
+    async def SendDirectMessage(
+        self, request: discord_api_pb2.SendDirectMessageRequest, context
+    ) -> discord_api_pb2.SendDirectMessageResponse:
         user = await self.discord_client.fetch_user(user_id=request.user_id)
         channel = await user.create_dm()
         if request.embed.ByteSize():
@@ -49,7 +51,7 @@ class DiscordApi(discord_api_pb2_grpc.DiscordApiServicer):
         else:
             embed = None
         await channel.send(content=request.content, embed=embed)
-        return discord_api_pb2.DiscordReply(ok=True, message="looks good")
+        return discord_api_pb2.SendDirectMessageResponse()
 
     @handle_discord_exceptions(discord_api_pb2.GetGuildChannelsResponse)
     async def GetGuildChannels(self, request, context):
