@@ -40,9 +40,7 @@ class DiscordApi(discord_api_pb2_grpc.DiscordApiServicer):
         self.discord_client = discord_client
 
     @handle_discord_exceptions(discord_api_pb2.SendDirectMessageResponse)
-    async def SendDirectMessage(
-        self, request: discord_api_pb2.SendDirectMessageRequest, context
-    ) -> discord_api_pb2.SendDirectMessageResponse:
+    async def SendDirectMessage(self, request, context):
         user = await self.discord_client.fetch_user(user_id=request.user_id)
         channel = await user.create_dm()
         if request.embed.ByteSize():

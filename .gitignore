@@ -15,3 +15,4 @@ htmlcov
 todos.md
 venv/
 _build/
+*.pyc
