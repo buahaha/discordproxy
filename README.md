@@ -23,7 +23,7 @@ Python applications can import the generated gRPC client directly. Applications 
 
 ## Example
 
-Here is an example for sending a direct message to user with ID 123:
+Here is a simple example for sending a direct message to user with ID 123 (without error handling):
 
 ```python
 import grpc
@@ -41,19 +41,35 @@ client.SendDirectMessage(request)
 
 ## Error handling
 
-Errors from the Discord API are usually HTTP exceptions and are mapped to gRPC exceptions.
+If a gRPC request fails a `grpc.RpcError` exception will be raised. RPC errors return the context of the request, consists of two fields:
 
-Here is an example on how to get details for errors from your gRPC calls:
+- `code`: the [gRPC status code](https://grpc.github.io/grpc/core/md_doc_statuscodes.html)
+- `details`: a string with additional details about the error.
 
-```python
-try:
-    client.SendDirectMessage(request)
-except grpc.RpcError as e:
-    print(e.args[0].code)
-    print(e.args[0].details)
-```
+The [Discord API](https://discord.com/developers/docs/topics/opcodes-and-status-codes) will return two types of error codes:
 
-gRPC exceptions have a code and a detail property. Discord errors will always have `code = grpc.StatusCode.ABORTED` and contain the actual Discord error in the detail property as JSON object, e.g. :
+- HTTP response code (e.g. 404 if a request user does not exist)
+- JSON error code (e.g. 30007 when the maximum number of webhooks is reached )
+
+We have mapped the HTTP response code to gRPC status codes. In addition the details field will contain the full information as JSON object.
+
+### gRPC status codes
+
+HTTP response code | gRPC status code
+-- | --
+400 (BAD REQUEST) | `INVALID_ARGUMENT`
+401 (UNAUTHORIZED) | `UNAUTHENTICATED`
+403 (FORBIDDEN) | `PERMISSION_DENIED`
+404 (NOT FOUND) | `NOT_FOUND`
+405 (METHOD NOT ALLOWED) | `INVALID_ARGUMENT`
+429 (TOO MANY REQUESTS) | `RESOURCE_EXHAUSTED`
+502 (GATEWAY UNAVAILABLE) | `UNAVAILABLE`
+504 (GATEWAY TIMEOUT) | `DEADLINE_EXCEEDED`
+5xx (SERVER ERROR) | `INTERNAL`
+
+### gRPC details
+
+gRPC exceptions have a code and a detail property. Discord errors will always have `code = grpc.StatusCode.ABORTED` and contain the actual Discord error in the detail property as JSON object, e.g.:
 
 ```json
 {
@@ -69,3 +85,17 @@ Legend:
 - `status`: HTTP status code
 - `code`: JSON error code
 - `text`: Error message
+
+### Example
+
+Here is an example on how to get details for errors from your gRPC calls:
+
+```python
+try:
+    client.SendDirectMessage(request)
+except grpc.RpcError as e:
+    print(e.args[0].code)
+    print(e.args[0].details)
+```
+
+> **Note**<br>While this example only looks at the first element, `e.args` might actually contain more than one error.

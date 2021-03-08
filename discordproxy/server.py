@@ -13,6 +13,7 @@ from discordproxy.config import setup_server
 from discordproxy.discord_client import DiscordClient
 
 logger = logging.getLogger(__name__)
+discord.VoiceClient.warn_nacl = False
 
 
 async def shutdown_server(signal, server, discord_client):
@@ -23,16 +24,12 @@ async def shutdown_server(signal, server, discord_client):
     await server.stop(0)
 
 
-async def run_server(token, my_args) -> None:
-    # init gRPC server and discord client
-    logger.info(f"Starting {__title__} v{__version__}...")
-    discord.VoiceClient.warn_nacl = False
-    discord_client = DiscordClient()
+async def run_server(token: str, discord_client: discord.Client, my_args) -> None:
+    # init gRPC server
     server = grpc.aio.server()
     add_DiscordApiServicer_to_server(DiscordApi(discord_client), server)
     listen_addr = f"{my_args.host}:{my_args.port}"
     server.add_insecure_port(listen_addr)
-
     # add event handlers for graceful shutdown
     loop = asyncio.get_event_loop()
     signals = (signal.SIGHUP, signal.SIGTERM, signal.SIGINT)
@@ -53,9 +50,12 @@ async def run_server(token, my_args) -> None:
 
 
 def main():
+    logger.info(f"Starting {__title__} v{__version__}...")
     print(f"{__title__} v{__version__}")
     print()
-    asyncio.run(run_server(*setup_server(sys.argv[1:])))
+    token, my_args = setup_server(sys.argv[1:])
+    discord_client = DiscordClient()
+    asyncio.run(run_server(token=token, discord_client=discord_client, my_args=my_args))
 
 
 if __name__ == "__main__":

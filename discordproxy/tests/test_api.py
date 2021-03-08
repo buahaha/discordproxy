@@ -1,192 +1,99 @@
-from unittest.mock import Mock, MagicMock
-from aiounittest import AsyncTestCase
+import json
+import logging
+from unittest.mock import MagicMock
 
+# from aiounittest import AsyncTestCase
+from asynctest import TestCase
 import discord
-from discord.errors import NotFound, Forbidden
 import grpc
 
 from discordproxy import api
 from discordproxy import discord_api_pb2
+from .helpers import DiscordClientStub, DiscordClientResponseStub, ServicerContextStub
 
 
-USERS = {1001: "user-1", 1002: "user-2", 1100: "forbidden user"}
-USERS_FORBIDDEN = [1100]
-CHANNELS = {2001: "channel-1", 2002: "channel-2", 2100: "forbidden channel"}
-CHANNELS_FORBIDDEN = [2100]
+logging.basicConfig()
 
 
-class AsyncMock(MagicMock):
-    async def __call__(self, *args, **kwargs):
-        return super(AsyncMock, self).__call__(*args, **kwargs)
+class DiscordClientErrorStub(DiscordClientStub):
+    """Stub for testing maping of Discord errors to gRPC errors"""
+
+    def __init__(self, status_code, message="") -> None:
+        self._status_code = status_code
+        self._message = message
+
+    async def fetch_user(self, *args, **kwargs):
+        raise discord.errors.HTTPException(
+            response=DiscordClientResponseStub(self._status_code), message=self._message
+        )
 
 
-class ResponseStub:
-    def __init__(self, status=200, reason="") -> None:
-        self.status = status
-        self.reason = reason
+class TestMapDiscordErrors(TestCase):
+    def setUp(self) -> None:
+        self.request = discord_api_pb2.SendDirectMessageRequest(
+            user_id=666, content="content"
+        )
+        self.context = ServicerContextStub()
 
+    async def test_should_map_all_http_codes_to_grpc_codes(self):
+        codes_mapping = {
+            400: grpc.StatusCode.INVALID_ARGUMENT,
+            401: grpc.StatusCode.UNAUTHENTICATED,
+            403: grpc.StatusCode.PERMISSION_DENIED,
+            404: grpc.StatusCode.NOT_FOUND,
+            405: grpc.StatusCode.INVALID_ARGUMENT,
+            429: grpc.StatusCode.RESOURCE_EXHAUSTED,
+            500: grpc.StatusCode.INTERNAL,
+            502: grpc.StatusCode.UNAVAILABLE,
+            504: grpc.StatusCode.DEADLINE_EXCEEDED,
+            599: grpc.StatusCode.UNKNOWN,
+        }
+        for status_code, grpc_code in codes_mapping.items():
+            # given
+            my_api = api.DiscordApi(DiscordClientErrorStub(status_code))
+            # when
+            result = await my_api.SendDirectMessage(self.request, self.context)
+            # then
+            self.assertEqual(result, discord_api_pb2.SendDirectMessageResponse())
+            self.assertEqual(self.context._code, grpc_code)
+            details = json.loads(self.context._details)
+            self.assertEqual(details["status"], status_code)
+            self.assertEqual(details["code"], 0)
 
-class DiscordChannel:
-    def __init__(self, id, name) -> None:
-        self.id = id
-        self.name = name
-
-    async def send(self, content, embed=None):
-        if content:
-            assert isinstance(content, str)
-        if embed:
-            assert isinstance(embed, discord.Embed)
-        if self.id in CHANNELS_FORBIDDEN:
-            raise Forbidden(
-                response=ResponseStub(403), message="Test:Forbidden channel"
-            )
-
-
-class DiscordUser:
-    def __init__(self, id, name) -> None:
-        self.id = id
-        self.name = name
-
-    async def create_dm(self):
-        if self.id in USERS_FORBIDDEN:
-            return DiscordChannel(2100, "dm-2")
-        else:
-            return DiscordChannel(2101, "dm-1")
-
-
-class DiscordStub:
-    async def fetch_channel(self, channel_id):
-        if channel_id in CHANNELS:
-            if channel_id in CHANNELS_FORBIDDEN:
-                raise Forbidden(response=Mock(), message="Test:Forbidden channel")
-            return DiscordChannel(id=channel_id, name=CHANNELS[channel_id])
-        raise NotFound(response=ResponseStub(404), message="Test:Unknown channel")
-
-    async def fetch_user(self, user_id):
-        if user_id in USERS:
-            return DiscordUser(id=user_id, name=USERS[user_id])
-        raise NotFound(response=ResponseStub(404), message="Test:Unknown user")
-
-
-class ServicerContextStub:
-    def __init__(self) -> None:
-        self._code = grpc.StatusCode.UNKNOWN
-        self._details = ""
-
-    def set_code(self, code):
-        self._code = code
-
-    def set_details(self, details):
-        self._details = details
-
-
-class TestSendDirectMessage(AsyncTestCase):
-    async def test_should_send_message_normally(self):
+    async def test_should_return_error_details(self):
         # given
-        my_api = api.DiscordApi(DiscordStub())
-        request = discord_api_pb2.SendDirectMessageRequest()
-        request.user_id = 1001
-        request.content = "content"
+        my_api = api.DiscordApi(DiscordClientErrorStub(404, "my_message"))
         # when
-        result = await my_api.SendDirectMessage(request=request, context=MagicMock())
+        await my_api.SendDirectMessage(self.request, self.context)
+        # then
+        details = json.loads(self.context._details)
+        self.assertEqual(details["status"], 404)
+        self.assertEqual(details["code"], 0)
+        self.assertEqual(details["text"], "my_message")
+
+
+class TestApi(TestCase):
+    def setUp(self) -> None:
+        self.my_api = api.DiscordApi(DiscordClientStub())
+
+    async def test_should_send_direct_message(self):
+        # given
+        request = discord_api_pb2.SendDirectMessageRequest(
+            user_id=1001, content="content"
+        )
+        # when
+        result = await self.my_api.SendDirectMessage(
+            request=request, context=MagicMock()
+        )
         # then
         self.assertIsInstance(result, discord_api_pb2.SendDirectMessageResponse)
 
-    async def test_should_return_error_when_user_not_known(self):
+    async def test_should_get_guild_channels(self):
         # given
-        my_api = api.DiscordApi(DiscordStub())
-        request = discord_api_pb2.SendDirectMessageRequest()
-        request.user_id = 666
-        request.content = "content"
-        context = ServicerContextStub()
+        request = discord_api_pb2.GetGuildChannelsRequest(guild_id=3001)
         # when
-        result = await my_api.SendDirectMessage(request, context)
+        result = await self.my_api.GetGuildChannels(
+            request=request, context=MagicMock()
+        )
         # then
-        self.assertEqual(result, discord_api_pb2.SendDirectMessageResponse())
-
-
-# class TestPostDirectMessageView(AioHTTPTestCase):
-#     async def get_application(self):
-#         app = web.Application()
-#         app.add_routes(routes)
-#         app["discord_client"] = DiscordStub()
-#         return app
-
-#     @unittest_run_loop
-#     async def test_should_return_204_when_ok_content_only(self):
-#         # when
-#         resp = await self.client.request(
-#             "POST",
-#             "/send_direct_message",
-#             json={"user_id": 1001, "content": "test_content"},
-#         )
-#         # then
-#         self.assertEqual(resp.status, 204)
-
-#     @unittest_run_loop
-#     async def test_should_return_204_when_ok_embed_only(self):
-#         # when
-#         resp = await self.client.request(
-#             "POST",
-#             "/send_direct_message",
-#             json={"user_id": 1001, "embed": {"description": "dummy"}},
-#         )
-#         # then
-#         self.assertEqual(resp.status, 204)
-
-#     @unittest_run_loop
-#     async def test_should_return_204_when_ok_content_and_embed(self):
-#         # when
-#         resp = await self.client.request(
-#             "POST",
-#             "/send_direct_message",
-#             json={
-#                 "user_id": 1001,
-#                 "content": "test_content",
-#                 "embed": {"description": "dummy"},
-#             },
-#         )
-#         # then
-#         self.assertEqual(resp.status, 204)
-
-#     @unittest_run_loop
-#     async def test_should_return_400_when_mandatory_param_is_missing(self):
-#         # when
-#         resp = await self.client.request(
-#             "POST",
-#             "/send_direct_message",
-#             json={"content": "bla bla"},
-#         )
-#         # then
-#         self.assertEqual(resp.status, 400)
-
-#     @unittest_run_loop
-#     async def test_should_return_400_when_both_content_and_embed_are_missing(self):
-#         # when
-#         resp = await self.client.request(
-#             "POST", "/send_direct_message", json={"user_id": 1001}
-#         )
-#         # then
-#         self.assertEqual(resp.status, 400)
-
-#     @unittest_run_loop
-#     async def test_should_return_404_when_user_is_unknown(self):
-#         # when
-#         resp = await self.client.request(
-#             "POST",
-#             "/send_direct_message",
-#             json={"user_id": 666, "content": "test_content"},
-#         )
-#         # then
-#         self.assertEqual(resp.status, 404)
-
-#     @unittest_run_loop
-#     async def test_should_return_403_when_user_access_not_allowed(self):
-#         # when
-#         resp = await self.client.request(
-#             "POST",
-#             "/send_direct_message",
-#             json={"user_id": 1100, "content": "test_content"},
-#         )
-#         # then
-#         self.assertEqual(resp.status, 403)
+        self.assertIsInstance(result, discord_api_pb2.GetGuildChannelsResponse)

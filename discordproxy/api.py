@@ -9,8 +9,29 @@ from discordproxy import discord_api_pb2_grpc
 from discordproxy import discord_api_pb2
 
 
+def _gen_grpc_details(status: int, code: int, text: str):
+    return {
+        "type": "HTTPException",
+        "status": int(status),
+        "code": int(code),
+        "text": str(text),
+    }
+
+
 def handle_discord_exceptions(Response):
     """converts discord HTTP exceptions into gRPC context"""
+
+    _CODES_MAPPING = {
+        400: grpc.StatusCode.INVALID_ARGUMENT,
+        401: grpc.StatusCode.UNAUTHENTICATED,
+        403: grpc.StatusCode.PERMISSION_DENIED,
+        404: grpc.StatusCode.NOT_FOUND,
+        405: grpc.StatusCode.INVALID_ARGUMENT,
+        429: grpc.StatusCode.RESOURCE_EXHAUSTED,
+        500: grpc.StatusCode.INTERNAL,
+        502: grpc.StatusCode.UNAVAILABLE,
+        504: grpc.StatusCode.DEADLINE_EXCEEDED,
+    }
 
     def wrapper(func):
         @functools.wraps(func)
@@ -18,14 +39,11 @@ def handle_discord_exceptions(Response):
             try:
                 return await func(*args, **kwargs)
             except discord.errors.HTTPException as ex:
-                details = {
-                    "type": "HTTPException",
-                    "status": ex.status,
-                    "code": ex.code,
-                    "text": ex.text,
-                }
+                details = _gen_grpc_details(
+                    status=ex.status, code=ex.code, text=ex.text
+                )
                 context = args[2]
-                context.set_code(grpc.StatusCode.ABORTED)
+                context.set_code(_CODES_MAPPING.get(ex.status, grpc.StatusCode.UNKNOWN))
                 context.set_details(json.dumps(details))
                 return Response()
 
