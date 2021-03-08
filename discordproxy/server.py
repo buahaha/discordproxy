@@ -24,9 +24,10 @@ async def shutdown_server(signal, server, discord_client):
     await server.stop(0)
 
 
-async def run_server(token: str, discord_client: discord.Client, my_args) -> None:
+async def run_server(token: str, my_args) -> None:
     # init gRPC server
     server = grpc.aio.server()
+    discord_client = DiscordClient()
     add_DiscordApiServicer_to_server(DiscordApi(discord_client), server)
     listen_addr = f"{my_args.host}:{my_args.port}"
     server.add_insecure_port(listen_addr)
@@ -54,8 +55,7 @@ def main():
     print(f"{__title__} v{__version__}")
     print()
     token, my_args = setup_server(sys.argv[1:])
-    discord_client = DiscordClient()
-    asyncio.run(run_server(token=token, discord_client=discord_client, my_args=my_args))
+    asyncio.run(run_server(token=token, my_args=my_args))
 
 
 if __name__ == "__main__":
