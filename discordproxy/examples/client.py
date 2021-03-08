@@ -1,32 +1,24 @@
-from random import randint
-
 import grpc
 
 from discordproxy.discord_api_pb2 import (
     SendDirectMessageRequest,
-    Embed,
-    # Thumbnail,
     GetGuildChannelsRequest,
 )
 from discordproxy.discord_api_pb2_grpc import DiscordApiStub
 
 
-def send_message():
+def send_direct_message(user_id):
     channel = grpc.insecure_channel("localhost:50051")
     client = DiscordApiStub(channel)
-    random_id = randint(1, 1000000000)
-    request = SendDirectMessageRequest(
-        user_id=152878250039705600,
-        content=f"Hi #{random_id}",
-        embed=Embed(description="oh yes"),
-    )
+    request = SendDirectMessageRequest(user_id=user_id, content="Hey, stranger!")
     try:
         client.SendDirectMessage(request)
     except grpc.RpcError as e:
+        print(e.args[0].code)
         print(e.args[0].details)
 
 
-def get_channels():
+def get_channels(guild_id):
     channel = grpc.insecure_channel("localhost:50051")
     client = DiscordApiStub(channel)
     request = GetGuildChannelsRequest(guild_id=197097249610661888)
@@ -37,7 +29,3 @@ def get_channels():
         print(e.args[0].details)
     else:
         print(channels)
-
-
-if __name__ == "__main__":
-    send_message()
