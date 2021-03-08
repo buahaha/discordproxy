@@ -42,12 +42,14 @@ async def run_server(token: str, my_args) -> None:
 
     # start the server
     msg = f"Starting gRPC server on {listen_addr}"
-    logger.info(msg)
+    logger.info("%s", msg)
     print(msg)
     await server.start()
     asyncio.ensure_future(discord_client.start(token))
     await server.wait_for_termination()
-    logger.info("gRPC server has shut down")
+    msg = "gRPC server has shut down"
+    logger.info("%s", msg)
+    print(msg)
 
 
 def main():
