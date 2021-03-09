@@ -27,17 +27,60 @@ message Channel {
 }
 
 
-message Thumbnail {
-  string url = 1;
-  string proxy_url = 2;
-  int32 height = 3;
-  int32 width = 4;
-}
+
 
 message Embed {
   string title = 1;
-  string description = 2;
-  Thumbnail thumbnail = 3;
+  string type = 2;
+  string description = 3;
+  string url = 4;
+  string timestamp = 5;
+  int32 color = 6;
+  message Footer {
+    string text = 1;
+    string icon_url = 2;
+    string proxy_icon_url = 3;
+  }
+  Footer footer = 7;
+  message Image {
+    string url = 1;
+    string proxy_icon_url = 2;
+    int32 height = 3;
+    int32 width = 4;
+  }
+  Image image = 8;
+  message Thumbnail {
+    string url = 1;
+    string proxy_url = 2;
+    int32 height = 3;
+    int32 width = 4;
+  }
+  Thumbnail thumbnail = 9;
+  message Video {
+    string url = 1;
+    string proxy_icon_url = 2;
+    int32 height = 3;
+    int32 width = 4;
+  }
+  Video video = 10;
+  message Provider {
+    string name = 1;
+    string url = 2;
+  }
+  Provider provider = 11;
+  message Author {
+    string name = 1;
+    string url = 2;
+    string icon_url = 3;
+    string proxy_icon_url = 4;
+  }
+  Author author = 12;
+  message Field {
+    string name = 1;
+    string value = 2;
+    bool inline = 3;
+  }
+  repeated Field fields = 13;
 }
 
 message SendDirectMessageRequest {

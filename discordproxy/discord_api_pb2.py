@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\x11\x64iscord_api.proto\x12\x0b\x64iscord_api\"\xf9\x01\n\x07\x43hannel\x12\n\n\x02id\x18\x01 \x01(\x04\x12\'\n\x04type\x18\x02 \x01(\x0e\x32\x19.discord_api.Channel.Type\x12\x10\n\x08guild_id\x18\x03 \x01(\x04\x12\x10\n\x08position\x18\x04 \x01(\x05\x12\x0c\n\x04name\x18\x06 \x01(\t\x12\r\n\x05topic\x18\x07 \x01(\t\"x\n\x04Type\x12\x0e\n\nGUILD_TEXT\x10\x00\x12\x0f\n\x0bGUILD_VOICE\x10\x01\x12\x0c\n\x08GROUP_DM\x10\x02\x12\x12\n\x0eGUILD_CATEGORY\x10\x03\x12\x0e\n\nGUILD_NEWS\x10\x04\x12\x0c\n\x08PRODUCTS\x10\x05\x12\x0f\n\x0bGUILD_STORE\x10\x06\"J\n\tThumbnail\x12\x0b\n\x03url\x18\x01 \x01(\t\x12\x11\n\tproxy_url\x18\x02 \x01(\t\x12\x0e\n\x06height\x18\x03 \x01(\x05\x12\r\n\x05width\x18\x04 \x01(\x05\"V\n\x05\x45mbed\x12\r\n\x05title\x18\x01 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x02 \x01(\t\x12)\n\tthumbnail\x18\x03 \x01(\x0b\x32\x16.discord_api.Thumbnail\"_\n\x18SendDirectMessageRequest\x12\x0f\n\x07user_id\x18\x01 \x01(\x04\x12\x0f\n\x07\x63ontent\x18\x02 \x01(\t\x12!\n\x05\x65mbed\x18\x03 \x01(\x0b\x32\x12.discord_api.Embed\"\x1b\n\x19SendDirectMessageResponse\"+\n\x17GetGuildChannelsRequest\x12\x10\n\x08guild_id\x18\x01 \x01(\x04\"B\n\x18GetGuildChannelsResponse\x12&\n\x08\x63hannels\x18\x01 \x03(\x0b\x32\x14.discord_api.Channel2\xd5\x01\n\nDiscordApi\x12\x64\n\x11SendDirectMessage\x12%.discord_api.SendDirectMessageRequest\x1a&.discord_api.SendDirectMessageResponse\"\x00\x12\x61\n\x10GetGuildChannels\x12$.discord_api.GetGuildChannelsRequest\x1a%.discord_api.GetGuildChannelsResponse\"\x00\x62\x06proto3'
+  serialized_pb=b'\n\x11\x64iscord_api.proto\x12\x0b\x64iscord_api\"\xf9\x01\n\x07\x43hannel\x12\n\n\x02id\x18\x01 \x01(\x04\x12\'\n\x04type\x18\x02 \x01(\x0e\x32\x19.discord_api.Channel.Type\x12\x10\n\x08guild_id\x18\x03 \x01(\x04\x12\x10\n\x08position\x18\x04 \x01(\x05\x12\x0c\n\x04name\x18\x06 \x01(\t\x12\r\n\x05topic\x18\x07 \x01(\t\"x\n\x04Type\x12\x0e\n\nGUILD_TEXT\x10\x00\x12\x0f\n\x0bGUILD_VOICE\x10\x01\x12\x0c\n\x08GROUP_DM\x10\x02\x12\x12\n\x0eGUILD_CATEGORY\x10\x03\x12\x0e\n\nGUILD_NEWS\x10\x04\x12\x0c\n\x08PRODUCTS\x10\x05\x12\x0f\n\x0bGUILD_STORE\x10\x06\"\xee\x06\n\x05\x45mbed\x12\r\n\x05title\x18\x01 \x01(\t\x12\x0c\n\x04type\x18\x02 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x03 \x01(\t\x12\x0b\n\x03url\x18\x04 \x01(\t\x12\x11\n\ttimestamp\x18\x05 \x01(\t\x12\r\n\x05\x63olor\x18\x06 \x01(\x05\x12)\n\x06\x66ooter\x18\x07 \x01(\x0b\x32\x19.discord_api.Embed.Footer\x12\'\n\x05image\x18\x08 \x01(\x0b\x32\x18.discord_api.Embed.Image\x12/\n\tthumbnail\x18\t \x01(\x0b\x32\x1c.discord_api.Embed.Thumbnail\x12\'\n\x05video\x18\n \x01(\x0b\x32\x18.discord_api.Embed.Video\x12-\n\x08provider\x18\x0b \x01(\x0b\x32\x1b.discord_api.Embed.Provider\x12)\n\x06\x61uthor\x18\x0c \x01(\x0b\x32\x19.discord_api.Embed.Author\x12(\n\x06\x66ields\x18\r \x03(\x0b\x32\x18.discord_api.Embed.Field\x1a@\n\x06\x46ooter\x12\x0c\n\x04text\x18\x01 \x01(\t\x12\x10\n\x08icon_url\x18\x02 \x01(\t\x12\x16\n\x0eproxy_icon_url\x18\x03 \x01(\t\x1aK\n\x05Image\x12\x0b\n\x03url\x18\x01 \x01(\t\x12\x16\n\x0eproxy_icon_url\x18\x02 \x01(\t\x12\x0e\n\x06height\x18\x03 \x01(\x05\x12\r\n\x05width\x18\x04 \x01(\x05\x1aJ\n\tThumbnail\x12\x0b\n\x03url\x18\x01 \x01(\t\x12\x11\n\tproxy_url\x18\x02 \x01(\t\x12\x0e\n\x06height\x18\x03 \x01(\x05\x12\r\n\x05width\x18\x04 \x01(\x05\x1aK\n\x05Video\x12\x0b\n\x03url\x18\x01 \x01(\t\x12\x16\n\x0eproxy_icon_url\x18\x02 \x01(\t\x12\x0e\n\x06height\x18\x03 \x01(\x05\x12\r\n\x05width\x18\x04 \x01(\x05\x1a%\n\x08Provider\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0b\n\x03url\x18\x02 \x01(\t\x1aM\n\x06\x41uthor\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0b\n\x03url\x18\x02 \x01(\t\x12\x10\n\x08icon_url\x18\x03 \x01(\t\x12\x16\n\x0eproxy_icon_url\x18\x04 \x01(\t\x1a\x34\n\x05\x46ield\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t\x12\x0e\n\x06inline\x18\x03 \x01(\x08\"_\n\x18SendDirectMessageRequest\x12\x0f\n\x07user_id\x18\x01 \x01(\x04\x12\x0f\n\x07\x63ontent\x18\x02 \x01(\t\x12!\n\x05\x65mbed\x18\x03 \x01(\x0b\x32\x12.discord_api.Embed\"\x1b\n\x19SendDirectMessageResponse\"+\n\x17GetGuildChannelsRequest\x12\x10\n\x08guild_id\x18\x01 \x01(\x04\"B\n\x18GetGuildChannelsResponse\x12&\n\x08\x63hannels\x18\x01 \x03(\x0b\x32\x14.discord_api.Channel2\xd5\x01\n\nDiscordApi\x12\x64\n\x11SendDirectMessage\x12%.discord_api.SendDirectMessageRequest\x1a&.discord_api.SendDirectMessageResponse\"\x00\x12\x61\n\x10GetGuildChannels\x12$.discord_api.GetGuildChannelsRequest\x1a%.discord_api.GetGuildChannelsResponse\"\x00\x62\x06proto3'
 )
 
 
@@ -143,37 +143,82 @@ _CHANNEL = _descriptor.Descriptor(
 )
 
 
-_THUMBNAIL = _descriptor.Descriptor(
-  name='Thumbnail',
-  full_name='discord_api.Thumbnail',
+_EMBED_FOOTER = _descriptor.Descriptor(
+  name='Footer',
+  full_name='discord_api.Embed.Footer',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='url', full_name='discord_api.Thumbnail.url', index=0,
+      name='text', full_name='discord_api.Embed.Footer.text', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='proxy_url', full_name='discord_api.Thumbnail.proxy_url', index=1,
+      name='icon_url', full_name='discord_api.Embed.Footer.icon_url', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='height', full_name='discord_api.Thumbnail.height', index=2,
+      name='proxy_icon_url', full_name='discord_api.Embed.Footer.proxy_icon_url', index=2,
+      number=3, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=699,
+  serialized_end=763,
+)
+
+_EMBED_IMAGE = _descriptor.Descriptor(
+  name='Image',
+  full_name='discord_api.Embed.Image',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='url', full_name='discord_api.Embed.Image.url', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='proxy_icon_url', full_name='discord_api.Embed.Image.proxy_icon_url', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='height', full_name='discord_api.Embed.Image.height', index=2,
       number=3, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='width', full_name='discord_api.Thumbnail.width', index=3,
+      name='width', full_name='discord_api.Embed.Image.width', index=3,
       number=4, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
@@ -191,10 +236,248 @@ _THUMBNAIL = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=286,
-  serialized_end=360,
+  serialized_start=765,
+  serialized_end=840,
 )
 
+_EMBED_THUMBNAIL = _descriptor.Descriptor(
+  name='Thumbnail',
+  full_name='discord_api.Embed.Thumbnail',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='url', full_name='discord_api.Embed.Thumbnail.url', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='proxy_url', full_name='discord_api.Embed.Thumbnail.proxy_url', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='height', full_name='discord_api.Embed.Thumbnail.height', index=2,
+      number=3, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='width', full_name='discord_api.Embed.Thumbnail.width', index=3,
+      number=4, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=842,
+  serialized_end=916,
+)
+
+_EMBED_VIDEO = _descriptor.Descriptor(
+  name='Video',
+  full_name='discord_api.Embed.Video',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='url', full_name='discord_api.Embed.Video.url', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='proxy_icon_url', full_name='discord_api.Embed.Video.proxy_icon_url', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='height', full_name='discord_api.Embed.Video.height', index=2,
+      number=3, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='width', full_name='discord_api.Embed.Video.width', index=3,
+      number=4, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=918,
+  serialized_end=993,
+)
+
+_EMBED_PROVIDER = _descriptor.Descriptor(
+  name='Provider',
+  full_name='discord_api.Embed.Provider',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='name', full_name='discord_api.Embed.Provider.name', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='url', full_name='discord_api.Embed.Provider.url', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=995,
+  serialized_end=1032,
+)
+
+_EMBED_AUTHOR = _descriptor.Descriptor(
+  name='Author',
+  full_name='discord_api.Embed.Author',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='name', full_name='discord_api.Embed.Author.name', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='url', full_name='discord_api.Embed.Author.url', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='icon_url', full_name='discord_api.Embed.Author.icon_url', index=2,
+      number=3, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='proxy_icon_url', full_name='discord_api.Embed.Author.proxy_icon_url', index=3,
+      number=4, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1034,
+  serialized_end=1111,
+)
+
+_EMBED_FIELD = _descriptor.Descriptor(
+  name='Field',
+  full_name='discord_api.Embed.Field',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='name', full_name='discord_api.Embed.Field.name', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='value', full_name='discord_api.Embed.Field.value', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='inline', full_name='discord_api.Embed.Field.inline', index=2,
+      number=3, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1113,
+  serialized_end=1165,
+)
 
 _EMBED = _descriptor.Descriptor(
   name='Embed',
@@ -212,23 +495,93 @@ _EMBED = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='description', full_name='discord_api.Embed.description', index=1,
+      name='type', full_name='discord_api.Embed.type', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='thumbnail', full_name='discord_api.Embed.thumbnail', index=2,
-      number=3, type=11, cpp_type=10, label=1,
+      name='description', full_name='discord_api.Embed.description', index=2,
+      number=3, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='url', full_name='discord_api.Embed.url', index=3,
+      number=4, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='timestamp', full_name='discord_api.Embed.timestamp', index=4,
+      number=5, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='color', full_name='discord_api.Embed.color', index=5,
+      number=6, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='footer', full_name='discord_api.Embed.footer', index=6,
+      number=7, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='image', full_name='discord_api.Embed.image', index=7,
+      number=8, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='thumbnail', full_name='discord_api.Embed.thumbnail', index=8,
+      number=9, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='video', full_name='discord_api.Embed.video', index=9,
+      number=10, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='provider', full_name='discord_api.Embed.provider', index=10,
+      number=11, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='author', full_name='discord_api.Embed.author', index=11,
+      number=12, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='fields', full_name='discord_api.Embed.fields', index=12,
+      number=13, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
   ],
   extensions=[
   ],
-  nested_types=[],
+  nested_types=[_EMBED_FOOTER, _EMBED_IMAGE, _EMBED_THUMBNAIL, _EMBED_VIDEO, _EMBED_PROVIDER, _EMBED_AUTHOR, _EMBED_FIELD, ],
   enum_types=[
   ],
   serialized_options=None,
@@ -237,8 +590,8 @@ _EMBED = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=362,
-  serialized_end=448,
+  serialized_start=287,
+  serialized_end=1165,
 )
 
 
@@ -283,8 +636,8 @@ _SENDDIRECTMESSAGEREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=450,
-  serialized_end=545,
+  serialized_start=1167,
+  serialized_end=1262,
 )
 
 
@@ -308,8 +661,8 @@ _SENDDIRECTMESSAGERESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=547,
-  serialized_end=574,
+  serialized_start=1264,
+  serialized_end=1291,
 )
 
 
@@ -340,8 +693,8 @@ _GETGUILDCHANNELSREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=576,
-  serialized_end=619,
+  serialized_start=1293,
+  serialized_end=1336,
 )
 
 
@@ -372,17 +725,29 @@ _GETGUILDCHANNELSRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=621,
-  serialized_end=687,
+  serialized_start=1338,
+  serialized_end=1404,
 )
 
 _CHANNEL.fields_by_name['type'].enum_type = _CHANNEL_TYPE
 _CHANNEL_TYPE.containing_type = _CHANNEL
-_EMBED.fields_by_name['thumbnail'].message_type = _THUMBNAIL
+_EMBED_FOOTER.containing_type = _EMBED
+_EMBED_IMAGE.containing_type = _EMBED
+_EMBED_THUMBNAIL.containing_type = _EMBED
+_EMBED_VIDEO.containing_type = _EMBED
+_EMBED_PROVIDER.containing_type = _EMBED
+_EMBED_AUTHOR.containing_type = _EMBED
+_EMBED_FIELD.containing_type = _EMBED
+_EMBED.fields_by_name['footer'].message_type = _EMBED_FOOTER
+_EMBED.fields_by_name['image'].message_type = _EMBED_IMAGE
+_EMBED.fields_by_name['thumbnail'].message_type = _EMBED_THUMBNAIL
+_EMBED.fields_by_name['video'].message_type = _EMBED_VIDEO
+_EMBED.fields_by_name['provider'].message_type = _EMBED_PROVIDER
+_EMBED.fields_by_name['author'].message_type = _EMBED_AUTHOR
+_EMBED.fields_by_name['fields'].message_type = _EMBED_FIELD
 _SENDDIRECTMESSAGEREQUEST.fields_by_name['embed'].message_type = _EMBED
 _GETGUILDCHANNELSRESPONSE.fields_by_name['channels'].message_type = _CHANNEL
 DESCRIPTOR.message_types_by_name['Channel'] = _CHANNEL
-DESCRIPTOR.message_types_by_name['Thumbnail'] = _THUMBNAIL
 DESCRIPTOR.message_types_by_name['Embed'] = _EMBED
 DESCRIPTOR.message_types_by_name['SendDirectMessageRequest'] = _SENDDIRECTMESSAGEREQUEST
 DESCRIPTOR.message_types_by_name['SendDirectMessageResponse'] = _SENDDIRECTMESSAGERESPONSE
@@ -397,19 +762,68 @@ Channel = _reflection.GeneratedProtocolMessageType('Channel', (_message.Message,
   })
 _sym_db.RegisterMessage(Channel)
 
-Thumbnail = _reflection.GeneratedProtocolMessageType('Thumbnail', (_message.Message,), {
-  'DESCRIPTOR' : _THUMBNAIL,
-  '__module__' : 'discord_api_pb2'
-  # @@protoc_insertion_point(class_scope:discord_api.Thumbnail)
-  })
-_sym_db.RegisterMessage(Thumbnail)
-
 Embed = _reflection.GeneratedProtocolMessageType('Embed', (_message.Message,), {
+
+  'Footer' : _reflection.GeneratedProtocolMessageType('Footer', (_message.Message,), {
+    'DESCRIPTOR' : _EMBED_FOOTER,
+    '__module__' : 'discord_api_pb2'
+    # @@protoc_insertion_point(class_scope:discord_api.Embed.Footer)
+    })
+  ,
+
+  'Image' : _reflection.GeneratedProtocolMessageType('Image', (_message.Message,), {
+    'DESCRIPTOR' : _EMBED_IMAGE,
+    '__module__' : 'discord_api_pb2'
+    # @@protoc_insertion_point(class_scope:discord_api.Embed.Image)
+    })
+  ,
+
+  'Thumbnail' : _reflection.GeneratedProtocolMessageType('Thumbnail', (_message.Message,), {
+    'DESCRIPTOR' : _EMBED_THUMBNAIL,
+    '__module__' : 'discord_api_pb2'
+    # @@protoc_insertion_point(class_scope:discord_api.Embed.Thumbnail)
+    })
+  ,
+
+  'Video' : _reflection.GeneratedProtocolMessageType('Video', (_message.Message,), {
+    'DESCRIPTOR' : _EMBED_VIDEO,
+    '__module__' : 'discord_api_pb2'
+    # @@protoc_insertion_point(class_scope:discord_api.Embed.Video)
+    })
+  ,
+
+  'Provider' : _reflection.GeneratedProtocolMessageType('Provider', (_message.Message,), {
+    'DESCRIPTOR' : _EMBED_PROVIDER,
+    '__module__' : 'discord_api_pb2'
+    # @@protoc_insertion_point(class_scope:discord_api.Embed.Provider)
+    })
+  ,
+
+  'Author' : _reflection.GeneratedProtocolMessageType('Author', (_message.Message,), {
+    'DESCRIPTOR' : _EMBED_AUTHOR,
+    '__module__' : 'discord_api_pb2'
+    # @@protoc_insertion_point(class_scope:discord_api.Embed.Author)
+    })
+  ,
+
+  'Field' : _reflection.GeneratedProtocolMessageType('Field', (_message.Message,), {
+    'DESCRIPTOR' : _EMBED_FIELD,
+    '__module__' : 'discord_api_pb2'
+    # @@protoc_insertion_point(class_scope:discord_api.Embed.Field)
+    })
+  ,
   'DESCRIPTOR' : _EMBED,
   '__module__' : 'discord_api_pb2'
   # @@protoc_insertion_point(class_scope:discord_api.Embed)
   })
 _sym_db.RegisterMessage(Embed)
+_sym_db.RegisterMessage(Embed.Footer)
+_sym_db.RegisterMessage(Embed.Image)
+_sym_db.RegisterMessage(Embed.Thumbnail)
+_sym_db.RegisterMessage(Embed.Video)
+_sym_db.RegisterMessage(Embed.Provider)
+_sym_db.RegisterMessage(Embed.Author)
+_sym_db.RegisterMessage(Embed.Field)
 
 SendDirectMessageRequest = _reflection.GeneratedProtocolMessageType('SendDirectMessageRequest', (_message.Message,), {
   'DESCRIPTOR' : _SENDDIRECTMESSAGEREQUEST,
@@ -448,8 +862,8 @@ _DISCORDAPI = _descriptor.ServiceDescriptor(
   index=0,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=690,
-  serialized_end=903,
+  serialized_start=1407,
+  serialized_end=1620,
   methods=[
   _descriptor.MethodDescriptor(
     name='SendDirectMessage',

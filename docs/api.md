@@ -6,11 +6,17 @@
 - [discord_api.proto](#discord_api.proto)
     - [Channel](#discord_api.Channel)
     - [Embed](#discord_api.Embed)
+    - [Embed.Author](#discord_api.Embed.Author)
+    - [Embed.Field](#discord_api.Embed.Field)
+    - [Embed.Footer](#discord_api.Embed.Footer)
+    - [Embed.Image](#discord_api.Embed.Image)
+    - [Embed.Provider](#discord_api.Embed.Provider)
+    - [Embed.Thumbnail](#discord_api.Embed.Thumbnail)
+    - [Embed.Video](#discord_api.Embed.Video)
     - [GetGuildChannelsRequest](#discord_api.GetGuildChannelsRequest)
     - [GetGuildChannelsResponse](#discord_api.GetGuildChannelsResponse)
     - [SendDirectMessageRequest](#discord_api.SendDirectMessageRequest)
     - [SendDirectMessageResponse](#discord_api.SendDirectMessageResponse)
-    - [Thumbnail](#discord_api.Thumbnail)
 
     - [Channel.Type](#discord_api.Channel.Type)
 
@@ -58,8 +64,140 @@ This file contains all messages and services currently supported by Discord Prox
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | title | [string](#string) |  |  |
+| type | [string](#string) |  |  |
 | description | [string](#string) |  |  |
-| thumbnail | [Thumbnail](#discord_api.Thumbnail) |  |  |
+| url | [string](#string) |  |  |
+| timestamp | [string](#string) |  |  |
+| color | [int32](#int32) |  |  |
+| footer | [Embed.Footer](#discord_api.Embed.Footer) |  |  |
+| image | [Embed.Image](#discord_api.Embed.Image) |  |  |
+| thumbnail | [Embed.Thumbnail](#discord_api.Embed.Thumbnail) |  |  |
+| video | [Embed.Video](#discord_api.Embed.Video) |  |  |
+| provider | [Embed.Provider](#discord_api.Embed.Provider) |  |  |
+| author | [Embed.Author](#discord_api.Embed.Author) |  |  |
+| fields | [Embed.Field](#discord_api.Embed.Field) | repeated |  |
+
+
+
+
+
+
+<a name="discord_api.Embed.Author"></a>
+
+### Embed.Author
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  |  |
+| url | [string](#string) |  |  |
+| icon_url | [string](#string) |  |  |
+| proxy_icon_url | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="discord_api.Embed.Field"></a>
+
+### Embed.Field
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  |  |
+| value | [string](#string) |  |  |
+| inline | [bool](#bool) |  |  |
+
+
+
+
+
+
+<a name="discord_api.Embed.Footer"></a>
+
+### Embed.Footer
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| text | [string](#string) |  |  |
+| icon_url | [string](#string) |  |  |
+| proxy_icon_url | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="discord_api.Embed.Image"></a>
+
+### Embed.Image
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| url | [string](#string) |  |  |
+| proxy_icon_url | [string](#string) |  |  |
+| height | [int32](#int32) |  |  |
+| width | [int32](#int32) |  |  |
+
+
+
+
+
+
+<a name="discord_api.Embed.Provider"></a>
+
+### Embed.Provider
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  |  |
+| url | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="discord_api.Embed.Thumbnail"></a>
+
+### Embed.Thumbnail
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| url | [string](#string) |  |  |
+| proxy_url | [string](#string) |  |  |
+| height | [int32](#int32) |  |  |
+| width | [int32](#int32) |  |  |
+
+
+
+
+
+
+<a name="discord_api.Embed.Video"></a>
+
+### Embed.Video
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| url | [string](#string) |  |  |
+| proxy_icon_url | [string](#string) |  |  |
+| height | [int32](#int32) |  |  |
+| width | [int32](#int32) |  |  |
 
 
 
@@ -117,24 +255,6 @@ This file contains all messages and services currently supported by Discord Prox
 
 ### SendDirectMessageResponse
 
-
-
-
-
-
-
-<a name="discord_api.Thumbnail"></a>
-
-### Thumbnail
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| url | [string](#string) |  |  |
-| proxy_url | [string](#string) |  |  |
-| height | [int32](#int32) |  |  |
-| width | [int32](#int32) |  |  |
 
 
 
