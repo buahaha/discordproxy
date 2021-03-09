@@ -1,3 +1,9 @@
+/**
+ * Discord API service
+ *
+ * This file contains all messages and services currently supported by Discord Proxy
+ */
+
 syntax = "proto3";
 
 package discord_api;
@@ -44,7 +50,6 @@ message SendDirectMessageRequest {
 message SendDirectMessageResponse {
 }
 
-// An empty message for testing
 message GetGuildChannelsRequest {
   uint64 guild_id = 1;
 }
