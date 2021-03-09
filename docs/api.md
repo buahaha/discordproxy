@@ -13,12 +13,28 @@
     - [Embed.Provider](#discord_api.Embed.Provider)
     - [Embed.Thumbnail](#discord_api.Embed.Thumbnail)
     - [Embed.Video](#discord_api.Embed.Video)
+    - [Emoji](#discord_api.Emoji)
     - [GetGuildChannelsRequest](#discord_api.GetGuildChannelsRequest)
     - [GetGuildChannelsResponse](#discord_api.GetGuildChannelsResponse)
+    - [GuildMember](#discord_api.GuildMember)
+    - [Message](#discord_api.Message)
+    - [Message.Activity](#discord_api.Message.Activity)
+    - [Message.Application](#discord_api.Message.Application)
+    - [Message.Attachment](#discord_api.Message.Attachment)
+    - [Message.ChannelMention](#discord_api.Message.ChannelMention)
+    - [Message.Reaction](#discord_api.Message.Reaction)
+    - [Message.Reference](#discord_api.Message.Reference)
+    - [Message.Sticker](#discord_api.Message.Sticker)
+    - [Role](#discord_api.Role)
+    - [Role.Tag](#discord_api.Role.Tag)
     - [SendDirectMessageRequest](#discord_api.SendDirectMessageRequest)
     - [SendDirectMessageResponse](#discord_api.SendDirectMessageResponse)
+    - [User](#discord_api.User)
 
     - [Channel.Type](#discord_api.Channel.Type)
+    - [Message.Activity.Type](#discord_api.Message.Activity.Type)
+    - [Message.Sticker.Type](#discord_api.Message.Sticker.Type)
+    - [Message.Type](#discord_api.Message.Type)
 
     - [DiscordApi](#discord_api.DiscordApi)
 
@@ -38,7 +54,7 @@ This file contains all messages and services currently supported by Discord Prox
 <a name="discord_api.Channel"></a>
 
 ### Channel
-
+Source: https://discord.com/developers/docs/resources/channel#channel-object
 
 
 | Field | Type | Label | Description |
@@ -58,7 +74,7 @@ This file contains all messages and services currently supported by Discord Prox
 <a name="discord_api.Embed"></a>
 
 ### Embed
-
+Source: https://discord.com/developers/docs/resources/channel#embed-object-embed-structure
 
 
 | Field | Type | Label | Description |
@@ -204,6 +220,28 @@ This file contains all messages and services currently supported by Discord Prox
 
 
 
+<a name="discord_api.Emoji"></a>
+
+### Emoji
+Source: https://discord.com/developers/docs/resources/emoji#emoji-object
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| id | [uint64](#uint64) |  |  |
+| name | [string](#string) |  |  |
+| roles | [uint64](#uint64) | repeated |  |
+| user | [User](#discord_api.User) |  |  |
+| required_colons | [bool](#bool) |  |  |
+| managed | [bool](#bool) |  |  |
+| animated | [bool](#bool) |  |  |
+| available | [bool](#bool) |  |  |
+
+
+
+
+
+
 <a name="discord_api.GetGuildChannelsRequest"></a>
 
 ### GetGuildChannelsRequest
@@ -234,6 +272,240 @@ This file contains all messages and services currently supported by Discord Prox
 
 
 
+<a name="discord_api.GuildMember"></a>
+
+### GuildMember
+Source: https://discord.com/developers/docs/resources/guild#guild-member-object
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| user | [User](#discord_api.User) |  |  |
+| nick | [string](#string) |  |  |
+| roles | [uint64](#uint64) | repeated |  |
+| joined_at | [string](#string) |  |  |
+| premium_since | [string](#string) |  |  |
+| deaf | [bool](#bool) |  |  |
+| mute | [bool](#bool) |  |  |
+| pending | [bool](#bool) |  |  |
+| permissions | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="discord_api.Message"></a>
+
+### Message
+Source: https://discord.com/developers/docs/resources/channel#message-object
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| id | [uint64](#uint64) |  |  |
+| channel_id | [uint64](#uint64) |  |  |
+| guild_id | [uint64](#uint64) |  |  |
+| author | [User](#discord_api.User) |  |  |
+| member | [GuildMember](#discord_api.GuildMember) |  |  |
+| content | [string](#string) |  |  |
+| timestamp | [string](#string) |  |  |
+| edited_timestamp | [string](#string) |  |  |
+| tts | [bool](#bool) |  |  |
+| mention_everyone | [bool](#bool) |  |  |
+| mentions | [User](#discord_api.User) | repeated |  |
+| mention_roles | [uint64](#uint64) | repeated |  |
+| mention_channels | [uint64](#uint64) | repeated |  |
+| attachments | [Message.Attachment](#discord_api.Message.Attachment) | repeated |  |
+| embeds | [Embed](#discord_api.Embed) | repeated |  |
+| reactions | [Message.Reaction](#discord_api.Message.Reaction) | repeated |  |
+| nonce | [string](#string) |  |  |
+| pinned | [bool](#bool) |  |  |
+| webhook_id | [uint64](#uint64) |  |  |
+| type | [Message.Type](#discord_api.Message.Type) |  |  |
+| activity | [Message.Activity](#discord_api.Message.Activity) |  |  |
+| application | [Message.Application](#discord_api.Message.Application) |  |  |
+| message_reference | [Message.Reference](#discord_api.Message.Reference) |  |  |
+| flags | [int32](#int32) |  |  |
+| stickers | [Message.Sticker](#discord_api.Message.Sticker) | repeated |  |
+| referenced_message | [Message](#discord_api.Message) |  | interaction: not implemented |
+
+
+
+
+
+
+<a name="discord_api.Message.Activity"></a>
+
+### Message.Activity
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| type | [Message.Activity.Type](#discord_api.Message.Activity.Type) |  |  |
+| party_id | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="discord_api.Message.Application"></a>
+
+### Message.Application
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| id | [uint64](#uint64) |  |  |
+| cover_image | [string](#string) |  |  |
+| description | [string](#string) |  |  |
+| icon | [string](#string) |  |  |
+| name | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="discord_api.Message.Attachment"></a>
+
+### Message.Attachment
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| id | [uint64](#uint64) |  |  |
+| filename | [string](#string) |  |  |
+| size | [int32](#int32) |  |  |
+| url | [string](#string) |  |  |
+| proxy_url | [string](#string) |  |  |
+| height | [int32](#int32) |  |  |
+| width | [int32](#int32) |  |  |
+
+
+
+
+
+
+<a name="discord_api.Message.ChannelMention"></a>
+
+### Message.ChannelMention
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| id | [uint64](#uint64) |  |  |
+| guild_id | [uint64](#uint64) |  |  |
+| type | [Channel.Type](#discord_api.Channel.Type) |  |  |
+| name | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="discord_api.Message.Reaction"></a>
+
+### Message.Reaction
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| count | [int32](#int32) |  |  |
+| me | [bool](#bool) |  |  |
+| emoji | [Emoji](#discord_api.Emoji) |  |  |
+
+
+
+
+
+
+<a name="discord_api.Message.Reference"></a>
+
+### Message.Reference
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| message_id | [uint64](#uint64) |  |  |
+| channel_id | [uint64](#uint64) |  |  |
+| guild_id | [uint64](#uint64) |  |  |
+| fail_if_not_exists | [bool](#bool) |  |  |
+
+
+
+
+
+
+<a name="discord_api.Message.Sticker"></a>
+
+### Message.Sticker
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| id | [uint64](#uint64) |  |  |
+| pack_id | [uint64](#uint64) |  |  |
+| name | [string](#string) |  |  |
+| description | [string](#string) |  |  |
+| tags | [string](#string) |  |  |
+| asset | [string](#string) |  |  |
+| preview_asset | [string](#string) |  |  |
+| format_type | [Message.Sticker.Type](#discord_api.Message.Sticker.Type) |  |  |
+
+
+
+
+
+
+<a name="discord_api.Role"></a>
+
+### Role
+Source: https://discord.com/developers/docs/topics/permissions#role-object
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| id | [uint64](#uint64) |  |  |
+| name | [string](#string) |  |  |
+| color | [int32](#int32) |  |  |
+| hoist | [bool](#bool) |  |  |
+| position | [int32](#int32) |  |  |
+| permissions | [string](#string) |  |  |
+| managed | [bool](#bool) |  |  |
+| mentionable | [bool](#bool) |  |  |
+| tags | [Role.Tag](#discord_api.Role.Tag) | repeated |  |
+
+
+
+
+
+
+<a name="discord_api.Role.Tag"></a>
+
+### Role.Tag
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| id | [uint64](#uint64) |  |  |
+| integration_id | [uint64](#uint64) |  |  |
+| premium_subscriber | [bool](#bool) |  |  |
+
+
+
+
+
+
 <a name="discord_api.SendDirectMessageRequest"></a>
 
 ### SendDirectMessageRequest
@@ -257,6 +529,38 @@ This file contains all messages and services currently supported by Discord Prox
 
 
 
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| message | [Message](#discord_api.Message) |  |  |
+
+
+
+
+
+
+<a name="discord_api.User"></a>
+
+### User
+Source: https://discord.com/developers/docs/resources/user#user-object
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| id | [uint64](#uint64) |  |  |
+| username | [string](#string) |  |  |
+| discriminator | [string](#string) |  |  |
+| avatar | [string](#string) |  |  |
+| bot | [bool](#bool) |  |  |
+| system | [bool](#bool) |  |  |
+| mfa_enabled | [bool](#bool) |  |  |
+| locale | [string](#string) |  |  |
+| verified | [bool](#bool) |  |  |
+| email | [string](#string) |  |  |
+| flags | [int32](#int32) |  |  |
+| premium_type | [int32](#int32) |  |  |
+| public_flags | [int32](#int32) |  |  |
+
+
 
 
 
@@ -277,6 +581,62 @@ This file contains all messages and services currently supported by Discord Prox
 | GUILD_NEWS | 4 |  |
 | PRODUCTS | 5 |  |
 | GUILD_STORE | 6 |  |
+
+
+
+<a name="discord_api.Message.Activity.Type"></a>
+
+### Message.Activity.Type
+
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| UNDEFINED | 0 |  |
+| JOIN | 1 |  |
+| SPECTATE | 2 |  |
+| LISTEN | 3 |  |
+| JOIN_REQUESTS | 4 |  |
+
+
+
+<a name="discord_api.Message.Sticker.Type"></a>
+
+### Message.Sticker.Type
+
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| UNDEFINED | 0 |  |
+| PNG | 1 |  |
+| APNG | 2 |  |
+| LOTTIE | 3 |  |
+
+
+
+<a name="discord_api.Message.Type"></a>
+
+### Message.Type
+
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| DEFAULT | 0 |  |
+| RECIPIENT_ADD | 1 |  |
+| RECIPIENT_REMOVE | 2 |  |
+| CALL | 3 |  |
+| CHANNEL_NAME_CHANGE | 4 |  |
+| CHANNEL_ICON_CHANGE | 5 |  |
+| CHANNEL_PINNED_MESSAGE | 6 |  |
+| GUILD_MEMBER_JOIN | 7 |  |
+| USER_PREMIUM_GUILD_SUBSCRIPTION | 8 |  |
+| USER_PREMIUM_GUILD_SUBSCRIPTION_TIER_1 | 9 |  |
+| USER_PREMIUM_GUILD_SUBSCRIPTION_TIER_2 | 10 |  |
+| USER_PREMIUM_GUILD_SUBSCRIPTION_TIER_3 | 11 |  |
+| CHANNEL_FOLLOW_ADD | 12 |  |
+| GUILD_DISCOVERY_DISQUALIFIED | 14 |  |
+| GUILD_DISCOVERY_REQUALIFIED | 15 |  |
+| REPLY | 19 |  |
+| APPLICATION_COMMAND | 20 |  |
 
 
 

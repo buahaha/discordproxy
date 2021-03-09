@@ -1,6 +1,7 @@
 import json
 import logging
-from unittest.mock import MagicMock
+
+# from unittest.mock import MagicMock
 
 # from aiounittest import AsyncTestCase
 from asynctest import TestCase
@@ -75,6 +76,7 @@ class TestMapDiscordErrors(TestCase):
 class TestApi(TestCase):
     def setUp(self) -> None:
         self.my_api = api.DiscordApi(DiscordClientStub())
+        self.context = ServicerContextStub()
 
     async def test_should_send_direct_message(self):
         # given
@@ -83,7 +85,50 @@ class TestApi(TestCase):
         )
         # when
         result = await self.my_api.SendDirectMessage(
-            request=request, context=MagicMock()
+            request=request, context=self.context
+        )
+        # then
+        self.assertIsInstance(result, discord_api_pb2.SendDirectMessageResponse)
+
+    async def test_should_send_direct_message_with_embed(self):
+        # given
+        request = discord_api_pb2.SendDirectMessageRequest(
+            user_id=1001,
+            content="content",
+            embed=discord_api_pb2.Embed(
+                title="title",
+                type="rich",
+                description="description",
+                url="url",
+                timestamp="2021-03-09T18:25:42.081000+00:00",
+                color=0,
+                footer=discord_api_pb2.Embed.Footer(
+                    text="text", icon_url="icon_url", proxy_icon_url="proxy_icon_url"
+                ),
+                image=discord_api_pb2.Embed.Image(
+                    url="url", proxy_icon_url="proxy_icon_url", height=42, width=66
+                ),
+                thumbnail=discord_api_pb2.Embed.Thumbnail(
+                    url="url", proxy_url="proxy_url", height=42, width=66
+                ),
+                video=discord_api_pb2.Embed.Video(
+                    url="url", proxy_icon_url="proxy_icon_url", height=42, width=66
+                ),
+                provider=discord_api_pb2.Embed.Provider(name="name", url="url"),
+                author=discord_api_pb2.Embed.Author(
+                    name="name",
+                    url="url",
+                    icon_url="icon_url",
+                    proxy_icon_url="proxy_icon_url",
+                ),
+                fields=[
+                    discord_api_pb2.Embed.Field(name="name", value="value", inline=True)
+                ],
+            ),
+        )
+        # when
+        result = await self.my_api.SendDirectMessage(
+            request=request, context=self.context
         )
         # then
         self.assertIsInstance(result, discord_api_pb2.SendDirectMessageResponse)
@@ -93,7 +138,7 @@ class TestApi(TestCase):
         request = discord_api_pb2.GetGuildChannelsRequest(guild_id=3001)
         # when
         result = await self.my_api.GetGuildChannels(
-            request=request, context=MagicMock()
+            request=request, context=self.context
         )
         # then
         self.assertIsInstance(result, discord_api_pb2.GetGuildChannelsResponse)

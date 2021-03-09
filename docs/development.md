@@ -11,16 +11,16 @@ from discordproxy.discord_api_pb2 import DirectMessageRequest
 from discordproxy.discord_api_pb2_grpc import DiscordApiStub
 
 
-channel = grpc.insecure_channel("localhost:50051")
-client = DiscordApiStub(channel)
-request = DirectMessageRequest(user_id=123, content="This is the way")
-client.SendDirectMessage(request)
+with grpc.insecure_channel("localhost:50051") as channel:
+    client = DiscordApiStub(channel)
+    request = DirectMessageRequest(user_id=123, content="This is the way")
+    client.SendDirectMessage(request)
 
 ```
 
 ## Error handling
 
-If a gRPC request fails a `grpc.RpcError` exception will be raised. RPC errors return the context of the request, consists of two fields:
+If a gRPC request fails a `grpc.RpcError` exception will be raised. RPC errors return the context of the request, consisting of two fields:
 
 - `code`: the [gRPC status code](https://grpc.github.io/grpc/core/md_doc_statuscodes.html)
 - `details`: a string with additional details about the error.
@@ -30,7 +30,7 @@ The [Discord API](https://discord.com/developers/docs/topics/opcodes-and-status-
 - HTTP response code (e.g. 404 if a request user does not exist)
 - JSON error code (e.g. 30007 when the maximum number of webhooks is reached )
 
-We have mapped the HTTP response code to gRPC status codes. In addition the details field will contain the full information as JSON object.
+Discord Proxy will map the HTTP response code from Discord to a gRPC status codes. In addition the details field will contain the full error information as JSON object.
 
 ### gRPC status codes
 
@@ -73,11 +73,11 @@ Here is an example on how to get details for errors from your gRPC calls:
 try:
     client.SendDirectMessage(request)
 except grpc.RpcError as e:
-    print(e.args[0].code)
-    print(e.args[0].details)
+    print(f"Code: {e.code()}")
+    print(f"Details: {e.details()}")
 ```
 
-> **Note**<br>While this example only looks at the first element, `e.args` might actually contain more than one error.
+> **Note**<br>For most cases it should be sufficient to deal with the status code. The JSON error code is only needed in some special cases.
 
 ## Timeouts
 

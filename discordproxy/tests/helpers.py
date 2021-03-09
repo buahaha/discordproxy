@@ -1,14 +1,19 @@
-from unittest.mock import Mock, MagicMock
+from unittest.mock import MagicMock
 
 import discord
 from discord.errors import NotFound, Forbidden
 import grpc
 
-USERS = {1001: "user-1", 1002: "user-2", 1100: "forbidden user"}
-USERS_FORBIDDEN = [1100]
-CHANNELS = {2001: "channel-1", 2002: "channel-2", 2100: "forbidden channel"}
-CHANNELS_FORBIDDEN = [2100]
-GUILDS = {3001: {"name": "Alpha", "channels": [2001, 2002]}}
+from . import testdata
+
+
+def my_handle_author(self, data):
+    self.author = discord.User(
+        state=MagicMock(spec=discord.state.ConnectionState), data=data
+    )
+
+
+discord.Message._handle_author = my_handle_author
 
 
 class AsyncMock(MagicMock):
@@ -23,43 +28,63 @@ class DiscordClientResponseStub:
 
 
 class DiscordChannel:
-    def __init__(self, id, name) -> None:
-        self.id = id
-        self.name = name
+    def __init__(self, id) -> None:
+        self.channel = testdata.CHANNELS[id]
 
     async def send(self, content, embed=None):
         if content:
             assert isinstance(content, str)
         if embed:
             assert isinstance(embed, discord.Embed)
-        if self.id in CHANNELS_FORBIDDEN:
+        if self.channel.id in testdata.CHANNELS_FORBIDDEN:
             raise Forbidden(
                 response=DiscordClientResponseStub(403),
                 message="Test:Forbidden channel",
             )
+        return discord.Message(
+            state=testdata.mock_state(),
+            channel=self.channel,
+            data={
+                "id": 42,
+                "type": 0,
+                "content": content,
+                "mention_everyone": False,
+                "timestamp": "2021-03-09T18:25:42.081000+00:00",
+                "edited_timestamp": "2021-03-09T18:25:42.081000+00:00",
+                "tts": False,
+                "pinned": False,
+                "attachments": [],
+                "embeds": [],  # TODO: convert embeds to dicts
+                "author": {
+                    "id": 1001,
+                    "username": "user-1",
+                    "discriminator": "discriminator-1",
+                    "avatar": "avatar-1",
+                },
+            },
+        )
 
 
 class DiscordUser:
-    def __init__(self, id, name) -> None:
-        self.id = id
-        self.name = name
+    def __init__(self, id) -> None:
+        self.user = testdata.USERS[id]
 
     async def create_dm(self):
-        if self.id in USERS_FORBIDDEN:
-            return DiscordChannel(2100, "dm-2")
+        if self.user.id in testdata.USERS_FORBIDDEN:
+            return DiscordChannel(2100)
         else:
-            return DiscordChannel(2101, "dm-1")
+            return DiscordChannel(2010)
 
 
 class DiscordGuild:
-    def __init__(self, id, name) -> None:
-        self.id = id
-        self.name = name
+    def __init__(self, id) -> None:
+        self.guild = testdata.GUILDS[id]
 
     async def fetch_channels(self) -> list:
         return [
-            DiscordChannel(id=channel_id, name=CHANNELS[channel_id])
-            for channel_id in GUILDS[self.id]["channels"]
+            channel
+            for channel in testdata.CHANNELS.values()
+            if isinstance(channel, discord.TextChannel) and channel.guild == self.guild
         ]
 
 
@@ -71,22 +96,24 @@ class DiscordClientStub:
         pass
 
     async def fetch_channel(self, channel_id):
-        if channel_id in CHANNELS:
-            if channel_id in CHANNELS_FORBIDDEN:
-                raise Forbidden(response=Mock(), message="Forbidden channel")
-            return DiscordChannel(id=channel_id, name=CHANNELS[channel_id])
+        if channel_id in testdata.CHANNELS:
+            if channel_id in testdata.CHANNELS_FORBIDDEN:
+                raise Forbidden(
+                    response=DiscordClientResponseStub(403), message="Forbidden channel"
+                )
+            return DiscordChannel(id=channel_id)
         raise NotFound(
             response=DiscordClientResponseStub(404), message="Unknown channel"
         )
 
     async def fetch_user(self, user_id):
-        if user_id in USERS:
-            return DiscordUser(id=user_id, name=USERS[user_id])
+        if user_id in testdata.USERS:
+            return DiscordUser(id=user_id)
         raise NotFound(response=DiscordClientResponseStub(404), message="Unknown user")
 
     async def fetch_guild(self, guild_id):
-        if guild_id in GUILDS:
-            return DiscordGuild(id=guild_id, name=GUILDS[guild_id]["name"])
+        if guild_id in testdata.GUILDS:
+            return DiscordGuild(id=guild_id)
         raise NotFound(response=DiscordClientResponseStub(404), message="Unknown guild")
 
 
