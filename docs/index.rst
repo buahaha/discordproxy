@@ -10,6 +10,8 @@ Welcome to discordproxy's documentation!
    :maxdepth: 2
    :caption: Contents:
 
+   operations
+   development
    api
 
 

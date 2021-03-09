@@ -24,7 +24,9 @@
 <p align="right"><a href="#top">Top</a></p>
 
 ## discord_api.proto
+Discord API service
 
+This file contains all messages and services currently supported by Discord Proxy
 
 
 <a name="discord_api.Channel"></a>

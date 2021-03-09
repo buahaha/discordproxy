@@ -3,7 +3,6 @@
  *
  * This file contains all messages and services currently supported by Discord Proxy
  */
-
 syntax = "proto3";
 
 package discord_api;
