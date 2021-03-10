@@ -73,12 +73,12 @@ def discord_to_grpc_embed(embed) -> discord_api_pb2.Embed:
 #     return grpc_role
 
 
-def discord_to_grpc_role_tag(role_tag) -> discord_api_pb2.Role.Tag:
-    return discord_api_pb2.Role.Tag(
-        id=role_tag.bot_id,
-        integration_id=role_tag.integration_id,
-        premium_subscriber=role_tag.is_premium_subscriber(),
-    )
+# def discord_to_grpc_role_tag(role_tag) -> discord_api_pb2.Role.Tag:
+#     return discord_api_pb2.Role.Tag(
+#         id=role_tag.bot_id,
+#         integration_id=role_tag.integration_id,
+#         premium_subscriber=role_tag.is_premium_subscriber(),
+#     )
 
 
 def discord_to_grpc_message(message) -> discord_api_pb2.Message:
@@ -113,6 +113,38 @@ def discord_to_grpc_message(message) -> discord_api_pb2.Message:
     )
 
 
+def discord_to_grpc_channel_type(
+    channel_type: discord.ChannelType,
+) -> discord_api_pb2.Channel.Type:
+    type_map = {
+        discord.ChannelType.text: discord_api_pb2.Channel.Type.GUILD_TEXT,
+        discord.ChannelType.private: discord_api_pb2.Channel.Type.DM,
+        discord.ChannelType.voice: discord_api_pb2.Channel.Type.GUILD_VOICE,
+        discord.ChannelType.group: discord_api_pb2.Channel.Type.GROUP_DM,
+        discord.ChannelType.category: discord_api_pb2.Channel.Type.GUILD_CATEGORY,
+        discord.ChannelType.news: discord_api_pb2.Channel.Type.GUILD_NEWS,
+        discord.ChannelType.store: discord_api_pb2.Channel.Type.GUILD_STORE,
+    }
+    return type_map.get(channel_type, discord_api_pb2.Channel.Type.GUILD_TEXT)
+
+
+def discord_to_grpc_channel(
+    channel: discord.abc.GuildChannel,
+) -> discord_api_pb2.Channel:
+    try:
+        guild_id = channel.guild.id
+    except AttributeError:
+        guild_id = None
+    return discord_api_pb2.Channel(
+        id=channel.id,
+        name=channel.name,
+        type=discord_to_grpc_channel_type(channel.type),
+        guild_id=guild_id,
+        position=channel.position,
+        topic=channel.topic,
+    )
+
+
 class DiscordApi(discord_api_pb2_grpc.DiscordApiServicer):
     def __init__(self, discord_client) -> None:
         super().__init__()
@@ -121,12 +153,7 @@ class DiscordApi(discord_api_pb2_grpc.DiscordApiServicer):
     @handle_discord_exceptions(discord_api_pb2.SendChannelMessageResponse)
     async def SendChannelMessage(self, request, context):
         channel = await self.discord_client.fetch_channel(channel_id=request.channel_id)
-        if request.embed.ByteSize():
-            embed_dct = json_format.MessageToDict(request.embed)
-            embed = discord.Embed.from_dict(embed_dct)
-        else:
-            embed = None
-        message = await channel.send(content=request.content, embed=embed)
+        message = await self._send_message_to_channel(request, channel)
         return discord_api_pb2.SendChannelMessageResponse(
             message=discord_to_grpc_message(message)
         )
@@ -135,22 +162,22 @@ class DiscordApi(discord_api_pb2_grpc.DiscordApiServicer):
     async def SendDirectMessage(self, request, context):
         user = await self.discord_client.fetch_user(user_id=request.user_id)
         channel = await user.create_dm()
-        if request.embed.ByteSize():
-            embed_dct = json_format.MessageToDict(request.embed)
-            embed = discord.Embed.from_dict(embed_dct)
-        else:
-            embed = None
-        message = await channel.send(content=request.content, embed=embed)
+        message = await self._send_message_to_channel(request, channel)
         return discord_api_pb2.SendDirectMessageResponse(
             message=discord_to_grpc_message(message)
         )
+
+    @staticmethod
+    async def _send_message_to_channel(request, channel):
+        kwargs = {"content": request.content}
+        if request.embed.ByteSize():
+            embed_dct = json_format.MessageToDict(request.embed)
+            kwargs["embed"] = discord.Embed.from_dict(embed_dct)
+        return await channel.send(**kwargs)
 
     @handle_discord_exceptions(discord_api_pb2.GetGuildChannelsResponse)
     async def GetGuildChannels(self, request, context):
         guild = await self.discord_client.fetch_guild(request.guild_id)
         channels = await guild.fetch_channels()
-        channels_2 = [
-            discord_api_pb2.Channel(id=channel.id, name=channel.name)
-            for channel in channels
-        ]
+        channels_2 = [discord_to_grpc_channel(channel) for channel in channels]
         return discord_api_pb2.GetGuildChannelsResponse(channels=channels_2)

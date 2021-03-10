@@ -609,11 +609,11 @@ Source: https://discord.com/developers/docs/resources/user#user-object
 | Name | Number | Description |
 | ---- | ------ | ----------- |
 | GUILD_TEXT | 0 |  |
-| GUILD_VOICE | 1 |  |
-| GROUP_DM | 2 |  |
-| GUILD_CATEGORY | 3 |  |
-| GUILD_NEWS | 4 |  |
-| PRODUCTS | 5 |  |
+| DM | 1 |  |
+| GUILD_VOICE | 2 |  |
+| GROUP_DM | 3 |  |
+| GUILD_CATEGORY | 4 |  |
+| GUILD_NEWS | 5 |  |
 | GUILD_STORE | 6 |  |
 
 

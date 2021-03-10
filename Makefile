@@ -10,6 +10,7 @@ generate:
 	python -m grpc_tools.protoc -I protobufs --python_out=discordproxy --grpc_python_out=discordproxy discord_api.proto
 	sed -i -E 's/^import.*_pb2/from . \0/' discordproxy/*_pb2*.py
 	protoc -I protobufs --doc_out=./docs --doc_opt=markdown,api.md discord_api.proto
+	make -C docs html
 
 pylint:
 	pylint $(package)
