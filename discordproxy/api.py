@@ -125,7 +125,7 @@ def discord_to_grpc_channel_type(
         discord.ChannelType.news: discord_api_pb2.Channel.Type.GUILD_NEWS,
         discord.ChannelType.store: discord_api_pb2.Channel.Type.GUILD_STORE,
     }
-    return type_map.get(channel_type, discord_api_pb2.Channel.Type.GUILD_TEXT)
+    return type_map.get(channel_type, discord_api_pb2.Channel.Type.UNDEFINED)
 
 
 def discord_to_grpc_channel(

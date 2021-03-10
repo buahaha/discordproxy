@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\x11\x64iscord_api.proto\x12\x0b\x64iscord_api\"\xf3\x01\n\x07\x43hannel\x12\n\n\x02id\x18\x01 \x01(\x04\x12\'\n\x04type\x18\x02 \x01(\x0e\x32\x19.discord_api.Channel.Type\x12\x10\n\x08guild_id\x18\x03 \x01(\x04\x12\x10\n\x08position\x18\x04 \x01(\x05\x12\x0c\n\x04name\x18\x06 \x01(\t\x12\r\n\x05topic\x18\x07 \x01(\t\"r\n\x04Type\x12\x0e\n\nGUILD_TEXT\x10\x00\x12\x06\n\x02\x44M\x10\x01\x12\x0f\n\x0bGUILD_VOICE\x10\x02\x12\x0c\n\x08GROUP_DM\x10\x03\x12\x12\n\x0eGUILD_CATEGORY\x10\x04\x12\x0e\n\nGUILD_NEWS\x10\x05\x12\x0f\n\x0bGUILD_STORE\x10\x06\"\xee\x06\n\x05\x45mbed\x12\r\n\x05title\x18\x01 \x01(\t\x12\x0c\n\x04type\x18\x02 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x03 \x01(\t\x12\x0b\n\x03url\x18\x04 \x01(\t\x12\x11\n\ttimestamp\x18\x05 \x01(\t\x12\r\n\x05\x63olor\x18\x06 \x01(\x05\x12)\n\x06\x66ooter\x18\x07 \x01(\x0b\x32\x19.discord_api.Embed.Footer\x12\'\n\x05image\x18\x08 \x01(\x0b\x32\x18.discord_api.Embed.Image\x12/\n\tthumbnail\x18\t \x01(\x0b\x32\x1c.discord_api.Embed.Thumbnail\x12\'\n\x05video\x18\n \x01(\x0b\x32\x18.discord_api.Embed.Video\x12-\n\x08provider\x18\x0b \x01(\x0b\x32\x1b.discord_api.Embed.Provider\x12)\n\x06\x61uthor\x18\x0c \x01(\x0b\x32\x19.discord_api.Embed.Author\x12(\n\x06\x66ields\x18\r \x03(\x0b\x32\x18.discord_api.Embed.Field\x1a@\n\x06\x46ooter\x12\x0c\n\x04text\x18\x01 \x01(\t\x12\x10\n\x08icon_url\x18\x02 \x01(\t\x12\x16\n\x0eproxy_icon_url\x18\x03 \x01(\t\x1aK\n\x05Image\x12\x0b\n\x03url\x18\x01 \x01(\t\x12\x16\n\x0eproxy_icon_url\x18\x02 \x01(\t\x12\x0e\n\x06height\x18\x03 \x01(\x05\x12\r\n\x05width\x18\x04 \x01(\x05\x1aJ\n\tThumbnail\x12\x0b\n\x03url\x18\x01 \x01(\t\x12\x11\n\tproxy_url\x18\x02 \x01(\t\x12\x0e\n\x06height\x18\x03 \x01(\x05\x12\r\n\x05width\x18\x04 \x01(\x05\x1aK\n\x05Video\x12\x0b\n\x03url\x18\x01 \x01(\t\x12\x16\n\x0eproxy_icon_url\x18\x02 \x01(\t\x12\x0e\n\x06height\x18\x03 \x01(\x05\x12\r\n\x05width\x18\x04 \x01(\x05\x1a%\n\x08Provider\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0b\n\x03url\x18\x02 \x01(\t\x1aM\n\x06\x41uthor\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0b\n\x03url\x18\x02 \x01(\t\x12\x10\n\x08icon_url\x18\x03 \x01(\t\x12\x16\n\x0eproxy_icon_url\x18\x04 \x01(\t\x1a\x34\n\x05\x46ield\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t\x12\x0e\n\x06inline\x18\x03 \x01(\x08\"\xa0\x01\n\x05\x45moji\x12\n\n\x02id\x18\x01 \x01(\x04\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\r\n\x05roles\x18\x03 \x03(\x04\x12\x1f\n\x04user\x18\x04 \x01(\x0b\x32\x11.discord_api.User\x12\x17\n\x0frequired_colons\x18\x05 \x01(\x08\x12\x0f\n\x07managed\x18\x06 \x01(\x08\x12\x10\n\x08\x61nimated\x18\x07 \x01(\x08\x12\x11\n\tavailable\x18\x08 \x01(\x08\"\xb7\x01\n\x0bGuildMember\x12\x1f\n\x04user\x18\x01 \x01(\x0b\x32\x11.discord_api.User\x12\x0c\n\x04nick\x18\x02 \x01(\t\x12\r\n\x05roles\x18\x03 \x03(\x04\x12\x11\n\tjoined_at\x18\x04 \x01(\t\x12\x15\n\rpremium_since\x18\x05 \x01(\t\x12\x0c\n\x04\x64\x65\x61\x66\x18\x06 \x01(\x08\x12\x0c\n\x04mute\x18\x07 \x01(\x08\x12\x0f\n\x07pending\x18\x08 \x01(\x08\x12\x13\n\x0bpermissions\x18\t \x01(\t\"\x90\x11\n\x07Message\x12\n\n\x02id\x18\x01 \x01(\x04\x12\x12\n\nchannel_id\x18\x02 \x01(\x04\x12\x10\n\x08guild_id\x18\x03 \x01(\x04\x12!\n\x06\x61uthor\x18\x04 \x01(\x0b\x32\x11.discord_api.User\x12(\n\x06member\x18\x05 \x01(\x0b\x32\x18.discord_api.GuildMember\x12\x0f\n\x07\x63ontent\x18\x06 \x01(\t\x12\x11\n\ttimestamp\x18\x07 \x01(\t\x12\x18\n\x10\x65\x64ited_timestamp\x18\x08 \x01(\t\x12\x0b\n\x03tts\x18\t \x01(\x08\x12\x18\n\x10mention_everyone\x18\n \x01(\x08\x12#\n\x08mentions\x18\x0b \x03(\x0b\x32\x11.discord_api.User\x12\x15\n\rmention_roles\x18\x0c \x03(\x04\x12\x18\n\x10mention_channels\x18\r \x03(\x04\x12\x34\n\x0b\x61ttachments\x18\x0e \x03(\x0b\x32\x1f.discord_api.Message.Attachment\x12\"\n\x06\x65mbeds\x18\x0f \x03(\x0b\x32\x12.discord_api.Embed\x12\x30\n\treactions\x18\x10 \x03(\x0b\x32\x1d.discord_api.Message.Reaction\x12\r\n\x05nonce\x18\x11 \x01(\t\x12\x0e\n\x06pinned\x18\x12 \x01(\x08\x12\x12\n\nwebhook_id\x18\x13 \x01(\x04\x12\'\n\x04type\x18\x14 \x01(\x0e\x32\x19.discord_api.Message.Type\x12/\n\x08\x61\x63tivity\x18\x15 \x01(\x0b\x32\x1d.discord_api.Message.Activity\x12\x35\n\x0b\x61pplication\x18\x16 \x01(\x0b\x32 .discord_api.Message.Application\x12\x39\n\x11message_reference\x18\x17 \x01(\x0b\x32\x1e.discord_api.Message.Reference\x12\r\n\x05\x66lags\x18\x18 \x01(\x05\x12.\n\x08stickers\x18\x19 \x03(\x0b\x32\x1c.discord_api.Message.Sticker\x12\x30\n\x12referenced_message\x18\x1a \x01(\x0b\x32\x14.discord_api.Message\x1a\x65\n\x0e\x43hannelMention\x12\n\n\x02id\x18\x01 \x01(\x04\x12\x10\n\x08guild_id\x18\x02 \x01(\x04\x12\'\n\x04type\x18\x03 \x01(\x0e\x32\x19.discord_api.Channel.Type\x12\x0c\n\x04name\x18\x04 \x01(\t\x1aw\n\nAttachment\x12\n\n\x02id\x18\x01 \x01(\x04\x12\x10\n\x08\x66ilename\x18\x02 \x01(\t\x12\x0c\n\x04size\x18\x03 \x01(\x05\x12\x0b\n\x03url\x18\x04 \x01(\t\x12\x11\n\tproxy_url\x18\x05 \x01(\t\x12\x0e\n\x06height\x18\x06 \x01(\x05\x12\r\n\x05width\x18\x07 \x01(\x05\x1aH\n\x08Reaction\x12\r\n\x05\x63ount\x18\x01 \x01(\x05\x12\n\n\x02me\x18\x02 \x01(\x08\x12!\n\x05\x65moji\x18\x03 \x01(\x0b\x32\x12.discord_api.Emoji\x1a\x9c\x01\n\x08\x41\x63tivity\x12\x30\n\x04type\x18\x01 \x01(\x0e\x32\".discord_api.Message.Activity.Type\x12\x10\n\x08party_id\x18\x02 \x01(\t\"L\n\x04Type\x12\r\n\tUNDEFINED\x10\x00\x12\x08\n\x04JOIN\x10\x01\x12\x0c\n\x08SPECTATE\x10\x02\x12\n\n\x06LISTEN\x10\x03\x12\x11\n\rJOIN_REQUESTS\x10\x04\x1a_\n\x0b\x41pplication\x12\n\n\x02id\x18\x01 \x01(\x04\x12\x13\n\x0b\x63over_image\x18\x02 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x03 \x01(\t\x12\x0c\n\x04icon\x18\x04 \x01(\t\x12\x0c\n\x04name\x18\x05 \x01(\t\x1a\x61\n\tReference\x12\x12\n\nmessage_id\x18\x01 \x01(\x04\x12\x12\n\nchannel_id\x18\x02 \x01(\x04\x12\x10\n\x08guild_id\x18\x03 \x01(\x04\x12\x1a\n\x12\x66\x61il_if_not_exists\x18\x04 \x01(\x08\x1a\xeb\x01\n\x07Sticker\x12\n\n\x02id\x18\x01 \x01(\x04\x12\x0f\n\x07pack_id\x18\x02 \x01(\x04\x12\x0c\n\x04name\x18\x03 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x04 \x01(\t\x12\x0c\n\x04tags\x18\x05 \x01(\t\x12\r\n\x05\x61sset\x18\x06 \x01(\t\x12\x15\n\rpreview_asset\x18\x07 \x01(\t\x12\x36\n\x0b\x66ormat_type\x18\x08 \x01(\x0e\x32!.discord_api.Message.Sticker.Type\"4\n\x04Type\x12\r\n\tUNDEFINED\x10\x00\x12\x07\n\x03PNG\x10\x01\x12\x08\n\x04\x41PNG\x10\x02\x12\n\n\x06LOTTIE\x10\x03\"\xd3\x03\n\x04Type\x12\x0b\n\x07\x44\x45\x46\x41ULT\x10\x00\x12\x11\n\rRECIPIENT_ADD\x10\x01\x12\x14\n\x10RECIPIENT_REMOVE\x10\x02\x12\x08\n\x04\x43\x41LL\x10\x03\x12\x17\n\x13\x43HANNEL_NAME_CHANGE\x10\x04\x12\x17\n\x13\x43HANNEL_ICON_CHANGE\x10\x05\x12\x1a\n\x16\x43HANNEL_PINNED_MESSAGE\x10\x06\x12\x15\n\x11GUILD_MEMBER_JOIN\x10\x07\x12#\n\x1fUSER_PREMIUM_GUILD_SUBSCRIPTION\x10\x08\x12*\n&USER_PREMIUM_GUILD_SUBSCRIPTION_TIER_1\x10\t\x12*\n&USER_PREMIUM_GUILD_SUBSCRIPTION_TIER_2\x10\n\x12*\n&USER_PREMIUM_GUILD_SUBSCRIPTION_TIER_3\x10\x0b\x12\x16\n\x12\x43HANNEL_FOLLOW_ADD\x10\x0c\x12 \n\x1cGUILD_DISCOVERY_DISQUALIFIED\x10\x0e\x12\x1f\n\x1bGUILD_DISCOVERY_REQUALIFIED\x10\x0f\x12\t\n\x05REPLY\x10\x13\x12\x17\n\x13\x41PPLICATION_COMMAND\x10\x14\"\xf7\x01\n\x04Role\x12\n\n\x02id\x18\x01 \x01(\x04\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\r\n\x05\x63olor\x18\x03 \x01(\x05\x12\r\n\x05hoist\x18\x04 \x01(\x08\x12\x10\n\x08position\x18\x05 \x01(\x05\x12\x13\n\x0bpermissions\x18\x06 \x01(\t\x12\x0f\n\x07managed\x18\x07 \x01(\x08\x12\x13\n\x0bmentionable\x18\x08 \x01(\x08\x12#\n\x04tags\x18\t \x03(\x0b\x32\x15.discord_api.Role.Tag\x1a\x45\n\x03Tag\x12\n\n\x02id\x18\x01 \x01(\x04\x12\x16\n\x0eintegration_id\x18\x02 \x01(\x04\x12\x1a\n\x12premium_subscriber\x18\x03 \x01(\x08\"\xe9\x01\n\x04User\x12\n\n\x02id\x18\x01 \x01(\x04\x12\x10\n\x08username\x18\x02 \x01(\t\x12\x15\n\rdiscriminator\x18\x03 \x01(\t\x12\x0e\n\x06\x61vatar\x18\x04 \x01(\t\x12\x0b\n\x03\x62ot\x18\x05 \x01(\x08\x12\x0e\n\x06system\x18\x06 \x01(\x08\x12\x13\n\x0bmfa_enabled\x18\x07 \x01(\x08\x12\x0e\n\x06locale\x18\x08 \x01(\t\x12\x10\n\x08verified\x18\t \x01(\x08\x12\r\n\x05\x65mail\x18\n \x01(\t\x12\r\n\x05\x66lags\x18\x0b \x01(\x05\x12\x14\n\x0cpremium_type\x18\x0c \x01(\x05\x12\x14\n\x0cpublic_flags\x18\r \x01(\x05\"c\n\x19SendChannelMessageRequest\x12\x12\n\nchannel_id\x18\x01 \x01(\x04\x12\x0f\n\x07\x63ontent\x18\x02 \x01(\t\x12!\n\x05\x65mbed\x18\x03 \x01(\x0b\x32\x12.discord_api.Embed\"C\n\x1aSendChannelMessageResponse\x12%\n\x07message\x18\x01 \x01(\x0b\x32\x14.discord_api.Message\"_\n\x18SendDirectMessageRequest\x12\x0f\n\x07user_id\x18\x01 \x01(\x04\x12\x0f\n\x07\x63ontent\x18\x02 \x01(\t\x12!\n\x05\x65mbed\x18\x03 \x01(\x0b\x32\x12.discord_api.Embed\"B\n\x19SendDirectMessageResponse\x12%\n\x07message\x18\x01 \x01(\x0b\x32\x14.discord_api.Message\"+\n\x17GetGuildChannelsRequest\x12\x10\n\x08guild_id\x18\x01 \x01(\x04\"B\n\x18GetGuildChannelsResponse\x12&\n\x08\x63hannels\x18\x01 \x03(\x0b\x32\x14.discord_api.Channel2\xbe\x02\n\nDiscordApi\x12g\n\x12SendChannelMessage\x12&.discord_api.SendChannelMessageRequest\x1a\'.discord_api.SendChannelMessageResponse\"\x00\x12\x64\n\x11SendDirectMessage\x12%.discord_api.SendDirectMessageRequest\x1a&.discord_api.SendDirectMessageResponse\"\x00\x12\x61\n\x10GetGuildChannels\x12$.discord_api.GetGuildChannelsRequest\x1a%.discord_api.GetGuildChannelsResponse\"\x00\x62\x06proto3'
+  serialized_pb=b'\n\x11\x64iscord_api.proto\x12\x0b\x64iscord_api\"\x83\x02\n\x07\x43hannel\x12\n\n\x02id\x18\x01 \x01(\x04\x12\'\n\x04type\x18\x02 \x01(\x0e\x32\x19.discord_api.Channel.Type\x12\x10\n\x08guild_id\x18\x03 \x01(\x04\x12\x10\n\x08position\x18\x04 \x01(\x05\x12\x0c\n\x04name\x18\x06 \x01(\t\x12\r\n\x05topic\x18\x07 \x01(\t\"\x81\x01\n\x04Type\x12\r\n\tUNDEFINED\x10\x00\x12\x0e\n\nGUILD_TEXT\x10\x01\x12\x06\n\x02\x44M\x10\x02\x12\x0f\n\x0bGUILD_VOICE\x10\x03\x12\x0c\n\x08GROUP_DM\x10\x04\x12\x12\n\x0eGUILD_CATEGORY\x10\x05\x12\x0e\n\nGUILD_NEWS\x10\x06\x12\x0f\n\x0bGUILD_STORE\x10\x07\"\xee\x06\n\x05\x45mbed\x12\r\n\x05title\x18\x01 \x01(\t\x12\x0c\n\x04type\x18\x02 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x03 \x01(\t\x12\x0b\n\x03url\x18\x04 \x01(\t\x12\x11\n\ttimestamp\x18\x05 \x01(\t\x12\r\n\x05\x63olor\x18\x06 \x01(\x05\x12)\n\x06\x66ooter\x18\x07 \x01(\x0b\x32\x19.discord_api.Embed.Footer\x12\'\n\x05image\x18\x08 \x01(\x0b\x32\x18.discord_api.Embed.Image\x12/\n\tthumbnail\x18\t \x01(\x0b\x32\x1c.discord_api.Embed.Thumbnail\x12\'\n\x05video\x18\n \x01(\x0b\x32\x18.discord_api.Embed.Video\x12-\n\x08provider\x18\x0b \x01(\x0b\x32\x1b.discord_api.Embed.Provider\x12)\n\x06\x61uthor\x18\x0c \x01(\x0b\x32\x19.discord_api.Embed.Author\x12(\n\x06\x66ields\x18\r \x03(\x0b\x32\x18.discord_api.Embed.Field\x1a@\n\x06\x46ooter\x12\x0c\n\x04text\x18\x01 \x01(\t\x12\x10\n\x08icon_url\x18\x02 \x01(\t\x12\x16\n\x0eproxy_icon_url\x18\x03 \x01(\t\x1aK\n\x05Image\x12\x0b\n\x03url\x18\x01 \x01(\t\x12\x16\n\x0eproxy_icon_url\x18\x02 \x01(\t\x12\x0e\n\x06height\x18\x03 \x01(\x05\x12\r\n\x05width\x18\x04 \x01(\x05\x1aJ\n\tThumbnail\x12\x0b\n\x03url\x18\x01 \x01(\t\x12\x11\n\tproxy_url\x18\x02 \x01(\t\x12\x0e\n\x06height\x18\x03 \x01(\x05\x12\r\n\x05width\x18\x04 \x01(\x05\x1aK\n\x05Video\x12\x0b\n\x03url\x18\x01 \x01(\t\x12\x16\n\x0eproxy_icon_url\x18\x02 \x01(\t\x12\x0e\n\x06height\x18\x03 \x01(\x05\x12\r\n\x05width\x18\x04 \x01(\x05\x1a%\n\x08Provider\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0b\n\x03url\x18\x02 \x01(\t\x1aM\n\x06\x41uthor\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0b\n\x03url\x18\x02 \x01(\t\x12\x10\n\x08icon_url\x18\x03 \x01(\t\x12\x16\n\x0eproxy_icon_url\x18\x04 \x01(\t\x1a\x34\n\x05\x46ield\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t\x12\x0e\n\x06inline\x18\x03 \x01(\x08\"\xa0\x01\n\x05\x45moji\x12\n\n\x02id\x18\x01 \x01(\x04\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\r\n\x05roles\x18\x03 \x03(\x04\x12\x1f\n\x04user\x18\x04 \x01(\x0b\x32\x11.discord_api.User\x12\x17\n\x0frequired_colons\x18\x05 \x01(\x08\x12\x0f\n\x07managed\x18\x06 \x01(\x08\x12\x10\n\x08\x61nimated\x18\x07 \x01(\x08\x12\x11\n\tavailable\x18\x08 \x01(\x08\"\xb7\x01\n\x0bGuildMember\x12\x1f\n\x04user\x18\x01 \x01(\x0b\x32\x11.discord_api.User\x12\x0c\n\x04nick\x18\x02 \x01(\t\x12\r\n\x05roles\x18\x03 \x03(\x04\x12\x11\n\tjoined_at\x18\x04 \x01(\t\x12\x15\n\rpremium_since\x18\x05 \x01(\t\x12\x0c\n\x04\x64\x65\x61\x66\x18\x06 \x01(\x08\x12\x0c\n\x04mute\x18\x07 \x01(\x08\x12\x0f\n\x07pending\x18\x08 \x01(\x08\x12\x13\n\x0bpermissions\x18\t \x01(\t\"\x90\x11\n\x07Message\x12\n\n\x02id\x18\x01 \x01(\x04\x12\x12\n\nchannel_id\x18\x02 \x01(\x04\x12\x10\n\x08guild_id\x18\x03 \x01(\x04\x12!\n\x06\x61uthor\x18\x04 \x01(\x0b\x32\x11.discord_api.User\x12(\n\x06member\x18\x05 \x01(\x0b\x32\x18.discord_api.GuildMember\x12\x0f\n\x07\x63ontent\x18\x06 \x01(\t\x12\x11\n\ttimestamp\x18\x07 \x01(\t\x12\x18\n\x10\x65\x64ited_timestamp\x18\x08 \x01(\t\x12\x0b\n\x03tts\x18\t \x01(\x08\x12\x18\n\x10mention_everyone\x18\n \x01(\x08\x12#\n\x08mentions\x18\x0b \x03(\x0b\x32\x11.discord_api.User\x12\x15\n\rmention_roles\x18\x0c \x03(\x04\x12\x18\n\x10mention_channels\x18\r \x03(\x04\x12\x34\n\x0b\x61ttachments\x18\x0e \x03(\x0b\x32\x1f.discord_api.Message.Attachment\x12\"\n\x06\x65mbeds\x18\x0f \x03(\x0b\x32\x12.discord_api.Embed\x12\x30\n\treactions\x18\x10 \x03(\x0b\x32\x1d.discord_api.Message.Reaction\x12\r\n\x05nonce\x18\x11 \x01(\t\x12\x0e\n\x06pinned\x18\x12 \x01(\x08\x12\x12\n\nwebhook_id\x18\x13 \x01(\x04\x12\'\n\x04type\x18\x14 \x01(\x0e\x32\x19.discord_api.Message.Type\x12/\n\x08\x61\x63tivity\x18\x15 \x01(\x0b\x32\x1d.discord_api.Message.Activity\x12\x35\n\x0b\x61pplication\x18\x16 \x01(\x0b\x32 .discord_api.Message.Application\x12\x39\n\x11message_reference\x18\x17 \x01(\x0b\x32\x1e.discord_api.Message.Reference\x12\r\n\x05\x66lags\x18\x18 \x01(\x05\x12.\n\x08stickers\x18\x19 \x03(\x0b\x32\x1c.discord_api.Message.Sticker\x12\x30\n\x12referenced_message\x18\x1a \x01(\x0b\x32\x14.discord_api.Message\x1a\x65\n\x0e\x43hannelMention\x12\n\n\x02id\x18\x01 \x01(\x04\x12\x10\n\x08guild_id\x18\x02 \x01(\x04\x12\'\n\x04type\x18\x03 \x01(\x0e\x32\x19.discord_api.Channel.Type\x12\x0c\n\x04name\x18\x04 \x01(\t\x1aw\n\nAttachment\x12\n\n\x02id\x18\x01 \x01(\x04\x12\x10\n\x08\x66ilename\x18\x02 \x01(\t\x12\x0c\n\x04size\x18\x03 \x01(\x05\x12\x0b\n\x03url\x18\x04 \x01(\t\x12\x11\n\tproxy_url\x18\x05 \x01(\t\x12\x0e\n\x06height\x18\x06 \x01(\x05\x12\r\n\x05width\x18\x07 \x01(\x05\x1aH\n\x08Reaction\x12\r\n\x05\x63ount\x18\x01 \x01(\x05\x12\n\n\x02me\x18\x02 \x01(\x08\x12!\n\x05\x65moji\x18\x03 \x01(\x0b\x32\x12.discord_api.Emoji\x1a\x9c\x01\n\x08\x41\x63tivity\x12\x30\n\x04type\x18\x01 \x01(\x0e\x32\".discord_api.Message.Activity.Type\x12\x10\n\x08party_id\x18\x02 \x01(\t\"L\n\x04Type\x12\r\n\tUNDEFINED\x10\x00\x12\x08\n\x04JOIN\x10\x01\x12\x0c\n\x08SPECTATE\x10\x02\x12\n\n\x06LISTEN\x10\x03\x12\x11\n\rJOIN_REQUESTS\x10\x04\x1a_\n\x0b\x41pplication\x12\n\n\x02id\x18\x01 \x01(\x04\x12\x13\n\x0b\x63over_image\x18\x02 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x03 \x01(\t\x12\x0c\n\x04icon\x18\x04 \x01(\t\x12\x0c\n\x04name\x18\x05 \x01(\t\x1a\x61\n\tReference\x12\x12\n\nmessage_id\x18\x01 \x01(\x04\x12\x12\n\nchannel_id\x18\x02 \x01(\x04\x12\x10\n\x08guild_id\x18\x03 \x01(\x04\x12\x1a\n\x12\x66\x61il_if_not_exists\x18\x04 \x01(\x08\x1a\xeb\x01\n\x07Sticker\x12\n\n\x02id\x18\x01 \x01(\x04\x12\x0f\n\x07pack_id\x18\x02 \x01(\x04\x12\x0c\n\x04name\x18\x03 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x04 \x01(\t\x12\x0c\n\x04tags\x18\x05 \x01(\t\x12\r\n\x05\x61sset\x18\x06 \x01(\t\x12\x15\n\rpreview_asset\x18\x07 \x01(\t\x12\x36\n\x0b\x66ormat_type\x18\x08 \x01(\x0e\x32!.discord_api.Message.Sticker.Type\"4\n\x04Type\x12\r\n\tUNDEFINED\x10\x00\x12\x07\n\x03PNG\x10\x01\x12\x08\n\x04\x41PNG\x10\x02\x12\n\n\x06LOTTIE\x10\x03\"\xd3\x03\n\x04Type\x12\x0b\n\x07\x44\x45\x46\x41ULT\x10\x00\x12\x11\n\rRECIPIENT_ADD\x10\x01\x12\x14\n\x10RECIPIENT_REMOVE\x10\x02\x12\x08\n\x04\x43\x41LL\x10\x03\x12\x17\n\x13\x43HANNEL_NAME_CHANGE\x10\x04\x12\x17\n\x13\x43HANNEL_ICON_CHANGE\x10\x05\x12\x1a\n\x16\x43HANNEL_PINNED_MESSAGE\x10\x06\x12\x15\n\x11GUILD_MEMBER_JOIN\x10\x07\x12#\n\x1fUSER_PREMIUM_GUILD_SUBSCRIPTION\x10\x08\x12*\n&USER_PREMIUM_GUILD_SUBSCRIPTION_TIER_1\x10\t\x12*\n&USER_PREMIUM_GUILD_SUBSCRIPTION_TIER_2\x10\n\x12*\n&USER_PREMIUM_GUILD_SUBSCRIPTION_TIER_3\x10\x0b\x12\x16\n\x12\x43HANNEL_FOLLOW_ADD\x10\x0c\x12 \n\x1cGUILD_DISCOVERY_DISQUALIFIED\x10\x0e\x12\x1f\n\x1bGUILD_DISCOVERY_REQUALIFIED\x10\x0f\x12\t\n\x05REPLY\x10\x13\x12\x17\n\x13\x41PPLICATION_COMMAND\x10\x14\"\xf7\x01\n\x04Role\x12\n\n\x02id\x18\x01 \x01(\x04\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\r\n\x05\x63olor\x18\x03 \x01(\x05\x12\r\n\x05hoist\x18\x04 \x01(\x08\x12\x10\n\x08position\x18\x05 \x01(\x05\x12\x13\n\x0bpermissions\x18\x06 \x01(\t\x12\x0f\n\x07managed\x18\x07 \x01(\x08\x12\x13\n\x0bmentionable\x18\x08 \x01(\x08\x12#\n\x04tags\x18\t \x03(\x0b\x32\x15.discord_api.Role.Tag\x1a\x45\n\x03Tag\x12\n\n\x02id\x18\x01 \x01(\x04\x12\x16\n\x0eintegration_id\x18\x02 \x01(\x04\x12\x1a\n\x12premium_subscriber\x18\x03 \x01(\x08\"\xe9\x01\n\x04User\x12\n\n\x02id\x18\x01 \x01(\x04\x12\x10\n\x08username\x18\x02 \x01(\t\x12\x15\n\rdiscriminator\x18\x03 \x01(\t\x12\x0e\n\x06\x61vatar\x18\x04 \x01(\t\x12\x0b\n\x03\x62ot\x18\x05 \x01(\x08\x12\x0e\n\x06system\x18\x06 \x01(\x08\x12\x13\n\x0bmfa_enabled\x18\x07 \x01(\x08\x12\x0e\n\x06locale\x18\x08 \x01(\t\x12\x10\n\x08verified\x18\t \x01(\x08\x12\r\n\x05\x65mail\x18\n \x01(\t\x12\r\n\x05\x66lags\x18\x0b \x01(\x05\x12\x14\n\x0cpremium_type\x18\x0c \x01(\x05\x12\x14\n\x0cpublic_flags\x18\r \x01(\x05\"c\n\x19SendChannelMessageRequest\x12\x12\n\nchannel_id\x18\x01 \x01(\x04\x12\x0f\n\x07\x63ontent\x18\x02 \x01(\t\x12!\n\x05\x65mbed\x18\x03 \x01(\x0b\x32\x12.discord_api.Embed\"C\n\x1aSendChannelMessageResponse\x12%\n\x07message\x18\x01 \x01(\x0b\x32\x14.discord_api.Message\"_\n\x18SendDirectMessageRequest\x12\x0f\n\x07user_id\x18\x01 \x01(\x04\x12\x0f\n\x07\x63ontent\x18\x02 \x01(\t\x12!\n\x05\x65mbed\x18\x03 \x01(\x0b\x32\x12.discord_api.Embed\"B\n\x19SendDirectMessageResponse\x12%\n\x07message\x18\x01 \x01(\x0b\x32\x14.discord_api.Message\"+\n\x17GetGuildChannelsRequest\x12\x10\n\x08guild_id\x18\x01 \x01(\x04\"B\n\x18GetGuildChannelsResponse\x12&\n\x08\x63hannels\x18\x01 \x03(\x0b\x32\x14.discord_api.Channel2\xbe\x02\n\nDiscordApi\x12g\n\x12SendChannelMessage\x12&.discord_api.SendChannelMessageRequest\x1a\'.discord_api.SendChannelMessageResponse\"\x00\x12\x64\n\x11SendDirectMessage\x12%.discord_api.SendDirectMessageRequest\x1a&.discord_api.SendDirectMessageResponse\"\x00\x12\x61\n\x10GetGuildChannels\x12$.discord_api.GetGuildChannelsRequest\x1a%.discord_api.GetGuildChannelsResponse\"\x00\x62\x06proto3'
 )
 
 
@@ -32,45 +32,50 @@ _CHANNEL_TYPE = _descriptor.EnumDescriptor(
   create_key=_descriptor._internal_create_key,
   values=[
     _descriptor.EnumValueDescriptor(
-      name='GUILD_TEXT', index=0, number=0,
+      name='UNDEFINED', index=0, number=0,
       serialized_options=None,
       type=None,
       create_key=_descriptor._internal_create_key),
     _descriptor.EnumValueDescriptor(
-      name='DM', index=1, number=1,
+      name='GUILD_TEXT', index=1, number=1,
       serialized_options=None,
       type=None,
       create_key=_descriptor._internal_create_key),
     _descriptor.EnumValueDescriptor(
-      name='GUILD_VOICE', index=2, number=2,
+      name='DM', index=2, number=2,
       serialized_options=None,
       type=None,
       create_key=_descriptor._internal_create_key),
     _descriptor.EnumValueDescriptor(
-      name='GROUP_DM', index=3, number=3,
+      name='GUILD_VOICE', index=3, number=3,
       serialized_options=None,
       type=None,
       create_key=_descriptor._internal_create_key),
     _descriptor.EnumValueDescriptor(
-      name='GUILD_CATEGORY', index=4, number=4,
+      name='GROUP_DM', index=4, number=4,
       serialized_options=None,
       type=None,
       create_key=_descriptor._internal_create_key),
     _descriptor.EnumValueDescriptor(
-      name='GUILD_NEWS', index=5, number=5,
+      name='GUILD_CATEGORY', index=5, number=5,
       serialized_options=None,
       type=None,
       create_key=_descriptor._internal_create_key),
     _descriptor.EnumValueDescriptor(
-      name='GUILD_STORE', index=6, number=6,
+      name='GUILD_NEWS', index=6, number=6,
+      serialized_options=None,
+      type=None,
+      create_key=_descriptor._internal_create_key),
+    _descriptor.EnumValueDescriptor(
+      name='GUILD_STORE', index=7, number=7,
       serialized_options=None,
       type=None,
       create_key=_descriptor._internal_create_key),
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=164,
-  serialized_end=278,
+  serialized_start=165,
+  serialized_end=294,
 )
 _sym_db.RegisterEnumDescriptor(_CHANNEL_TYPE)
 
@@ -109,8 +114,8 @@ _MESSAGE_ACTIVITY_TYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=2723,
-  serialized_end=2799,
+  serialized_start=2739,
+  serialized_end=2815,
 )
 _sym_db.RegisterEnumDescriptor(_MESSAGE_ACTIVITY_TYPE)
 
@@ -144,8 +149,8 @@ _MESSAGE_STICKER_TYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=3181,
-  serialized_end=3233,
+  serialized_start=3197,
+  serialized_end=3249,
 )
 _sym_db.RegisterEnumDescriptor(_MESSAGE_STICKER_TYPE)
 
@@ -244,8 +249,8 @@ _MESSAGE_TYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=3236,
-  serialized_end=3703,
+  serialized_start=3252,
+  serialized_end=3719,
 )
 _sym_db.RegisterEnumDescriptor(_MESSAGE_TYPE)
 
@@ -314,7 +319,7 @@ _CHANNEL = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=35,
-  serialized_end=278,
+  serialized_end=294,
 )
 
 
@@ -359,8 +364,8 @@ _EMBED_FOOTER = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=693,
-  serialized_end=757,
+  serialized_start=709,
+  serialized_end=773,
 )
 
 _EMBED_IMAGE = _descriptor.Descriptor(
@@ -411,8 +416,8 @@ _EMBED_IMAGE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=759,
-  serialized_end=834,
+  serialized_start=775,
+  serialized_end=850,
 )
 
 _EMBED_THUMBNAIL = _descriptor.Descriptor(
@@ -463,8 +468,8 @@ _EMBED_THUMBNAIL = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=836,
-  serialized_end=910,
+  serialized_start=852,
+  serialized_end=926,
 )
 
 _EMBED_VIDEO = _descriptor.Descriptor(
@@ -515,8 +520,8 @@ _EMBED_VIDEO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=912,
-  serialized_end=987,
+  serialized_start=928,
+  serialized_end=1003,
 )
 
 _EMBED_PROVIDER = _descriptor.Descriptor(
@@ -553,8 +558,8 @@ _EMBED_PROVIDER = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=989,
-  serialized_end=1026,
+  serialized_start=1005,
+  serialized_end=1042,
 )
 
 _EMBED_AUTHOR = _descriptor.Descriptor(
@@ -605,8 +610,8 @@ _EMBED_AUTHOR = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1028,
-  serialized_end=1105,
+  serialized_start=1044,
+  serialized_end=1121,
 )
 
 _EMBED_FIELD = _descriptor.Descriptor(
@@ -650,8 +655,8 @@ _EMBED_FIELD = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1107,
-  serialized_end=1159,
+  serialized_start=1123,
+  serialized_end=1175,
 )
 
 _EMBED = _descriptor.Descriptor(
@@ -765,8 +770,8 @@ _EMBED = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=281,
-  serialized_end=1159,
+  serialized_start=297,
+  serialized_end=1175,
 )
 
 
@@ -846,8 +851,8 @@ _EMOJI = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1162,
-  serialized_end=1322,
+  serialized_start=1178,
+  serialized_end=1338,
 )
 
 
@@ -934,8 +939,8 @@ _GUILDMEMBER = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1325,
-  serialized_end=1508,
+  serialized_start=1341,
+  serialized_end=1524,
 )
 
 
@@ -987,8 +992,8 @@ _MESSAGE_CHANNELMENTION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2344,
-  serialized_end=2445,
+  serialized_start=2360,
+  serialized_end=2461,
 )
 
 _MESSAGE_ATTACHMENT = _descriptor.Descriptor(
@@ -1060,8 +1065,8 @@ _MESSAGE_ATTACHMENT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2447,
-  serialized_end=2566,
+  serialized_start=2463,
+  serialized_end=2582,
 )
 
 _MESSAGE_REACTION = _descriptor.Descriptor(
@@ -1105,8 +1110,8 @@ _MESSAGE_REACTION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2568,
-  serialized_end=2640,
+  serialized_start=2584,
+  serialized_end=2656,
 )
 
 _MESSAGE_ACTIVITY = _descriptor.Descriptor(
@@ -1144,8 +1149,8 @@ _MESSAGE_ACTIVITY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2643,
-  serialized_end=2799,
+  serialized_start=2659,
+  serialized_end=2815,
 )
 
 _MESSAGE_APPLICATION = _descriptor.Descriptor(
@@ -1203,8 +1208,8 @@ _MESSAGE_APPLICATION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2801,
-  serialized_end=2896,
+  serialized_start=2817,
+  serialized_end=2912,
 )
 
 _MESSAGE_REFERENCE = _descriptor.Descriptor(
@@ -1255,8 +1260,8 @@ _MESSAGE_REFERENCE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2898,
-  serialized_end=2995,
+  serialized_start=2914,
+  serialized_end=3011,
 )
 
 _MESSAGE_STICKER = _descriptor.Descriptor(
@@ -1336,8 +1341,8 @@ _MESSAGE_STICKER = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2998,
-  serialized_end=3233,
+  serialized_start=3014,
+  serialized_end=3249,
 )
 
 _MESSAGE = _descriptor.Descriptor(
@@ -1543,8 +1548,8 @@ _MESSAGE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1511,
-  serialized_end=3703,
+  serialized_start=1527,
+  serialized_end=3719,
 )
 
 
@@ -1589,8 +1594,8 @@ _ROLE_TAG = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3884,
-  serialized_end=3953,
+  serialized_start=3900,
+  serialized_end=3969,
 )
 
 _ROLE = _descriptor.Descriptor(
@@ -1676,8 +1681,8 @@ _ROLE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3706,
-  serialized_end=3953,
+  serialized_start=3722,
+  serialized_end=3969,
 )
 
 
@@ -1792,8 +1797,8 @@ _USER = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3956,
-  serialized_end=4189,
+  serialized_start=3972,
+  serialized_end=4205,
 )
 
 
@@ -1838,8 +1843,8 @@ _SENDCHANNELMESSAGEREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4191,
-  serialized_end=4290,
+  serialized_start=4207,
+  serialized_end=4306,
 )
 
 
@@ -1870,8 +1875,8 @@ _SENDCHANNELMESSAGERESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4292,
-  serialized_end=4359,
+  serialized_start=4308,
+  serialized_end=4375,
 )
 
 
@@ -1916,8 +1921,8 @@ _SENDDIRECTMESSAGEREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4361,
-  serialized_end=4456,
+  serialized_start=4377,
+  serialized_end=4472,
 )
 
 
@@ -1948,8 +1953,8 @@ _SENDDIRECTMESSAGERESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4458,
-  serialized_end=4524,
+  serialized_start=4474,
+  serialized_end=4540,
 )
 
 
@@ -1980,8 +1985,8 @@ _GETGUILDCHANNELSREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4526,
-  serialized_end=4569,
+  serialized_start=4542,
+  serialized_end=4585,
 )
 
 
@@ -2012,8 +2017,8 @@ _GETGUILDCHANNELSRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4571,
-  serialized_end=4637,
+  serialized_start=4587,
+  serialized_end=4653,
 )
 
 _CHANNEL.fields_by_name['type'].enum_type = _CHANNEL_TYPE
@@ -2302,8 +2307,8 @@ _DISCORDAPI = _descriptor.ServiceDescriptor(
   index=0,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=4640,
-  serialized_end=4958,
+  serialized_start=4656,
+  serialized_end=4974,
   methods=[
   _descriptor.MethodDescriptor(
     name='SendChannelMessage',
