@@ -15,6 +15,11 @@ class DiscordApiStub(object):
         Args:
             channel: A grpc.Channel.
         """
+        self.SendChannelMessage = channel.unary_unary(
+                '/discord_api.DiscordApi/SendChannelMessage',
+                request_serializer=discord__api__pb2.SendChannelMessageRequest.SerializeToString,
+                response_deserializer=discord__api__pb2.SendChannelMessageResponse.FromString,
+                )
         self.SendDirectMessage = channel.unary_unary(
                 '/discord_api.DiscordApi/SendDirectMessage',
                 request_serializer=discord__api__pb2.SendDirectMessageRequest.SerializeToString,
@@ -30,6 +35,13 @@ class DiscordApiStub(object):
 class DiscordApiServicer(object):
     """Provides access to the Discord API
     """
+
+    def SendChannelMessage(self, request, context):
+        """Send a message to a guild channel
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
 
     def SendDirectMessage(self, request, context):
         """Send a direct message to a user
@@ -48,6 +60,11 @@ class DiscordApiServicer(object):
 
 def add_DiscordApiServicer_to_server(servicer, server):
     rpc_method_handlers = {
+            'SendChannelMessage': grpc.unary_unary_rpc_method_handler(
+                    servicer.SendChannelMessage,
+                    request_deserializer=discord__api__pb2.SendChannelMessageRequest.FromString,
+                    response_serializer=discord__api__pb2.SendChannelMessageResponse.SerializeToString,
+            ),
             'SendDirectMessage': grpc.unary_unary_rpc_method_handler(
                     servicer.SendDirectMessage,
                     request_deserializer=discord__api__pb2.SendDirectMessageRequest.FromString,
@@ -68,6 +85,23 @@ def add_DiscordApiServicer_to_server(servicer, server):
 class DiscordApi(object):
     """Provides access to the Discord API
     """
+
+    @staticmethod
+    def SendChannelMessage(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/discord_api.DiscordApi/SendChannelMessage',
+            discord__api__pb2.SendChannelMessageRequest.SerializeToString,
+            discord__api__pb2.SendChannelMessageResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def SendDirectMessage(request,

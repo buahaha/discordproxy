@@ -1,11 +1,34 @@
 import grpc
 
 from discordproxy.discord_api_pb2 import (
+    SendChannelMessageRequest,
     SendDirectMessageRequest,
     GetGuildChannelsRequest,
     Embed,
 )
 from discordproxy.discord_api_pb2_grpc import DiscordApiStub
+
+
+def send_channel_message(channel_id):
+    with grpc.insecure_channel("localhost:50051") as channel:
+        client = DiscordApiStub(channel)
+        request = SendChannelMessageRequest(
+            channel_id=channel_id,
+            content="Hey, stranger!",
+            embed=Embed(
+                description="more info!",
+                thumbnail=Embed.Thumbnail(
+                    url="https://images.evetech.net/characters/93330670/portrait?size=128"
+                ),
+            ),
+        )
+        try:
+            message = client.SendChannelMessage(request)
+        except grpc.RpcError as e:
+            print(f"Code: {e.code()}")
+            print(f"Details: {e.details()}")
+        else:
+            print(message)
 
 
 def send_direct_message(user_id):
@@ -44,4 +67,5 @@ def get_channels(guild_id):
 
 
 if __name__ == "__main__":
-    send_direct_message(152878250039705600)  # 152878250039705600
+    # send_direct_message(152878250039705600)  # 152878250039705600
+    send_channel_message(795663934463148052)

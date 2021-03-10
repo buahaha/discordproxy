@@ -1,3 +1,4 @@
+from random import randint
 from unittest.mock import MagicMock
 
 import discord
@@ -104,6 +105,11 @@ ROLES = obj_list_2_dict(
             guild=GUILDS[3001],
             data={"id": 2, "name": "role-2"},
         ),
+        discord.Role(
+            state=mock_state,
+            guild=GUILDS[3001],
+            data={"id": 3, "name": "role-3"},
+        ),
     ]
 )
 MEMBERS_DATA = [{"user": USERS_DATA_BY_ID[1001], "roles": [1, 2]}]
@@ -112,8 +118,24 @@ MEMBERS_LIST = [
     discord.Member(data=data, guild=GUILDS[3001], state=mock_state)
     for data in MEMBERS_DATA
 ]
-
 MEMBERS = obj_list_2_dict(MEMBERS_LIST)
+
+
+def my_get_member(self, user_id):
+    if user_id in MEMBERS:
+        return MEMBERS[user_id]
+    return None
+
+
+def my_get_role(self, role_id):
+    if role_id in ROLES:
+        return ROLES[role_id]
+    return None
+
+
+discord.Guild.get_member = my_get_member
+discord.Guild.get_role = my_get_role
+discord.Guild.default_role = ROLES[1]
 
 
 class DiscordClientResponseStub:
@@ -138,7 +160,7 @@ class DiscordChannel:
             )
 
         data = {
-            "id": 42,
+            "id": randint(1000000000, 2000000000),
             "channel_id": self.channel.id,
             "type": 0,
             "content": content,

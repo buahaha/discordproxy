@@ -57,18 +57,20 @@ def discord_to_grpc_embed(embed) -> discord_api_pb2.Embed:
     return json_format.ParseDict(embed_dict, discord_api_pb2.Embed())
 
 
-def discord_to_grpc_role(role) -> discord_api_pb2.Role:
-    return discord_api_pb2.Role(
-        id=role.id,
-        name=role.name,
-        color=role.color.value,
-        hoist=role.hoist,
-        position=role.position,
-        permissions=role.permissions.value,
-        managed=role.managed,
-        mentionable=role.mentionable,
-        tags=[discord_to_grpc_role_tag(obj) for obj in role.tags],
-    )
+# def discord_to_grpc_role(role) -> discord_api_pb2.Role:
+#     grpc_role = discord_api_pb2.Role(
+#         id=role.id,
+#         name=role.name,
+#         color=role.color.value,
+#         hoist=role.hoist,
+#         position=role.position,
+#         # permissions=role.permissions, TODO
+#         managed=role.managed,
+#         mentionable=role.mentionable,
+#     )
+#     if role.tags:
+#         grpc_role.tags = [discord_to_grpc_role_tag(obj) for obj in role.tags]
+#     return grpc_role
 
 
 def discord_to_grpc_role_tag(role_tag) -> discord_api_pb2.Role.Tag:
@@ -92,9 +94,11 @@ def discord_to_grpc_message(message) -> discord_api_pb2.Message:
         member = discord_api_pb2.GuildMember(
             user=author,
             nick=message.author.nick,
-            roles=[discord_to_grpc_role(obj) for obj in message.author.roles],
-            joined_at=message.author.joined_at.isoformat(),
-            permissions=message.author.permissions.value,
+            roles=[obj.id for obj in message.author.roles],
+            joined_at=message.author.joined_at.isoformat()
+            if message.author.joined_at
+            else None,
+            # permissions=message.author.permissions.value, TODO
         )
     else:
         member = None
@@ -113,6 +117,19 @@ class DiscordApi(discord_api_pb2_grpc.DiscordApiServicer):
     def __init__(self, discord_client) -> None:
         super().__init__()
         self.discord_client = discord_client
+
+    @handle_discord_exceptions(discord_api_pb2.SendChannelMessageResponse)
+    async def SendChannelMessage(self, request, context):
+        channel = await self.discord_client.fetch_channel(channel_id=request.channel_id)
+        if request.embed.ByteSize():
+            embed_dct = json_format.MessageToDict(request.embed)
+            embed = discord.Embed.from_dict(embed_dct)
+        else:
+            embed = None
+        message = await channel.send(content=request.content, embed=embed)
+        return discord_api_pb2.SendChannelMessageResponse(
+            message=discord_to_grpc_message(message)
+        )
 
     @handle_discord_exceptions(discord_api_pb2.SendDirectMessageResponse)
     async def SendDirectMessage(self, request, context):

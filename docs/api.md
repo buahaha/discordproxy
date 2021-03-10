@@ -27,6 +27,8 @@
     - [Message.Sticker](#discord_api.Message.Sticker)
     - [Role](#discord_api.Role)
     - [Role.Tag](#discord_api.Role.Tag)
+    - [SendChannelMessageRequest](#discord_api.SendChannelMessageRequest)
+    - [SendChannelMessageResponse](#discord_api.SendChannelMessageResponse)
     - [SendDirectMessageRequest](#discord_api.SendDirectMessageRequest)
     - [SendDirectMessageResponse](#discord_api.SendDirectMessageResponse)
     - [User](#discord_api.User)
@@ -506,6 +508,38 @@ Source: https://discord.com/developers/docs/topics/permissions#role-object
 
 
 
+<a name="discord_api.SendChannelMessageRequest"></a>
+
+### SendChannelMessageRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| channel_id | [uint64](#uint64) |  |  |
+| content | [string](#string) |  |  |
+| embed | [Embed](#discord_api.Embed) |  |  |
+
+
+
+
+
+
+<a name="discord_api.SendChannelMessageResponse"></a>
+
+### SendChannelMessageResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| message | [Message](#discord_api.Message) |  |  |
+
+
+
+
+
+
 <a name="discord_api.SendDirectMessageRequest"></a>
 
 ### SendDirectMessageRequest
@@ -651,6 +685,7 @@ Provides access to the Discord API
 
 | Method Name | Request Type | Response Type | Description |
 | ----------- | ------------ | ------------- | ------------|
+| SendChannelMessage | [SendChannelMessageRequest](#discord_api.SendChannelMessageRequest) | [SendChannelMessageResponse](#discord_api.SendChannelMessageResponse) | Send a message to a guild channel |
 | SendDirectMessage | [SendDirectMessageRequest](#discord_api.SendDirectMessageRequest) | [SendDirectMessageResponse](#discord_api.SendDirectMessageResponse) | Send a direct message to a user |
 | GetGuildChannels | [GetGuildChannelsRequest](#discord_api.GetGuildChannelsRequest) | [GetGuildChannelsResponse](#discord_api.GetGuildChannelsResponse) | Get the list of channel for a guild |
 

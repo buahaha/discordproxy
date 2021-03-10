@@ -258,6 +258,16 @@ message User {
 ///////////////////////////////////
 // Service messages
 
+message SendChannelMessageRequest {
+  uint64 channel_id = 1;
+  string content = 2;
+  Embed embed = 3;
+}
+
+message SendChannelMessageResponse {
+  Message message = 1;
+}
+
 message SendDirectMessageRequest {
   uint64 user_id = 1;
   string content = 2;
@@ -278,6 +288,8 @@ message GetGuildChannelsResponse {
 
 // Provides access to the Discord API
 service DiscordApi {
+  // Send a message to a guild channel
+  rpc SendChannelMessage (SendChannelMessageRequest) returns (SendChannelMessageResponse) {}
   // Send a direct message to a user
   rpc SendDirectMessage (SendDirectMessageRequest) returns (SendDirectMessageResponse) {}
   // Get the list of channel for a guild
