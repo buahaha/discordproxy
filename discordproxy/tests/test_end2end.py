@@ -9,7 +9,7 @@
 # from discordproxy.discord_api_pb2 import SendDirectMessageRequest
 # from discordproxy.discord_api_pb2_grpc import DiscordApiStub
 # from discordproxy.server import run_server
-# from .helpers import DiscordClientStub
+# from .fixtures import DiscordClientStub
 
 
 # MyArgsStub = namedtuple("MyArgsStub", ["host", "port"])

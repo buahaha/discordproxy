@@ -86,7 +86,10 @@ All requests are synchronous and sometimes it can take a few seconds for a reque
 Here is how to use timeout with requests to the Discord Proxy. All timeouts are in seconds:
 
 ```Python
+try:
     client.SendDirectMessage(request, timeout=10)
+except grpc.RpcError as e:
+    # handle timeouts
 ```
 
 Should a timeout be triggered the client will receive a `grpc.RpcError` with status code `DEADLINE_EXCEEDED`.

@@ -10,7 +10,7 @@ import grpc
 
 from discordproxy import api
 from discordproxy import discord_api_pb2
-from .helpers import DiscordClientStub, DiscordClientResponseStub, ServicerContextStub
+from .fixtures import DiscordClientStub, DiscordClientResponseStub, ServicerContextStub
 
 
 logging.basicConfig()

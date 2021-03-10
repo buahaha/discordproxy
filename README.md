@@ -7,7 +7,7 @@ Proxy server for accessing the Discord API via gRPC
 [![release](https://img.shields.io/pypi/v/discordproxy?label=release)](https://pypi.org/project/discordproxy/)
 [![python](https://img.shields.io/pypi/pyversions/discordproxy)](https://pypi.org/project/discordproxy/)
 [![pipeline](https://gitlab.com/ErikKalkoken/discordproxy/badges/master/pipeline.svg)](https://gitlab.com/ErikKalkoken/discordproxy/-/pipelines)
-[![coverage report](https://gitlab.com/ErikKalkoken/discordproxy/badges/master/coverage.svg)](https://gitlab.com/ErikKalkoken/discordproxy/-/commits/master)
+[![codecov](https://codecov.io/gl/ErikKalkoken/discordproxy/branch/master/graph/badge.svg?token=JJN735H9XV)](https://codecov.io/gl/ErikKalkoken/discordproxy)
 [![Documentation Status](https://readthedocs.org/projects/discordproxy/badge/?version=latest)](https://discordproxy.readthedocs.io/en/latest/?badge=latest)
 [![license](https://img.shields.io/badge/license-MIT-green)](https://gitlab.com/ErikKalkoken/discordproxy/-/blob/master/LICENSE)
 [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/pre-commit/pre-commit)
