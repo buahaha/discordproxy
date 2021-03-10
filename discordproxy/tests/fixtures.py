@@ -5,6 +5,8 @@ import discord
 from discord.errors import NotFound, Forbidden
 import grpc
 
+from discordproxy import discord_api_pb2
+
 
 mock_state = MagicMock(name="ConnectionState")
 mock_state.store_user = lambda data: discord.User(state=mock_state, data=data)
@@ -61,7 +63,7 @@ CHANNELS = obj_list_2_dict(
             data={
                 "id": 2001,
                 "name": "channel-1",
-                "type": CHANNEL_TYPE_GUILD_TEXT,
+                "type": discord_api_pb2.Channel.Type.GUILD_TEXT,
                 "position": 1,
             },
         ),
@@ -71,7 +73,7 @@ CHANNELS = obj_list_2_dict(
             data={
                 "id": 2002,
                 "name": "channel-2",
-                "type": CHANNEL_TYPE_GUILD_TEXT,
+                "type": discord_api_pb2.Channel.Type.GUILD_TEXT,
                 "position": 2,
             },
         ),
@@ -79,6 +81,16 @@ CHANNELS = obj_list_2_dict(
             state=mock_state,
             me=False,
             data={"id": 2010, "recipients": [USERS_DATA_BY_ID[1002]]},
+        ),
+        discord.VoiceChannel(
+            state=mock_state,
+            guild=GUILDS[3001],
+            data={
+                "id": 2051,
+                "name": "voice-1",
+                "type": discord_api_pb2.Channel.Type.GUILD_VOICE,
+                "position": 99,
+            },
         ),
         discord.TextChannel(
             state=mock_state,
@@ -200,7 +212,8 @@ class DiscordGuild:
         return [
             channel
             for channel in CHANNELS.values()
-            if isinstance(channel, discord.TextChannel) and channel.guild == self.guild
+            if isinstance(channel, (discord.TextChannel, discord.VoiceChannel))
+            and channel.guild == self.guild
         ]
 
 

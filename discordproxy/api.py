@@ -135,13 +135,17 @@ def discord_to_grpc_channel(
         guild_id = channel.guild.id
     except AttributeError:
         guild_id = None
+    try:
+        topic = channel.topic
+    except AttributeError:
+        topic = None
     return discord_api_pb2.Channel(
         id=channel.id,
         name=channel.name,
         type=discord_to_grpc_channel_type(channel.type),
         guild_id=guild_id,
         position=channel.position,
-        topic=channel.topic,
+        topic=topic,
     )
 
 

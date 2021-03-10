@@ -157,4 +157,6 @@ class TestApi(TestCase):
         )
         # then
         self.assertIsInstance(result, discord_api_pb2.GetGuildChannelsResponse)
-        self.assertSetEqual({obj.id for obj in result.channels}, {2001, 2002, 2100})
+        self.assertSetEqual(
+            {obj.id for obj in result.channels}, {2001, 2002, 2051, 2100}
+        )
