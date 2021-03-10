@@ -5,28 +5,14 @@ import logging
 
 # from aiounittest import AsyncTestCase
 from asynctest import TestCase
-import discord
 import grpc
 
 from discordproxy import api
 from discordproxy import discord_api_pb2
-from .fixtures import DiscordClientStub, DiscordClientResponseStub, ServicerContextStub
+from .fixtures import DiscordClientStub, ServicerContextStub, DiscordClientErrorStub
 
 
 logging.basicConfig()
-
-
-class DiscordClientErrorStub(DiscordClientStub):
-    """Stub for testing maping of Discord errors to gRPC errors"""
-
-    def __init__(self, status_code, message="") -> None:
-        self._status_code = status_code
-        self._message = message
-
-    async def fetch_user(self, *args, **kwargs):
-        raise discord.errors.HTTPException(
-            response=DiscordClientResponseStub(self._status_code), message=self._message
-        )
 
 
 class TestMapDiscordErrors(TestCase):

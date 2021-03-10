@@ -133,6 +133,7 @@ def my_get_role(self, role_id):
     return None
 
 
+# patch discord library
 discord.Guild.get_member = my_get_member
 discord.Guild.get_role = my_get_role
 discord.Guild.default_role = ROLES[1]
@@ -242,3 +243,16 @@ class ServicerContextStub:
 
     def set_details(self, details):
         self._details = details
+
+
+class DiscordClientErrorStub(DiscordClientStub):
+    """Stub for testing maping of Discord errors to gRPC errors"""
+
+    def __init__(self, status_code, message="") -> None:
+        self._status_code = status_code
+        self._message = message
+
+    async def fetch_user(self, *args, **kwargs):
+        raise discord.errors.HTTPException(
+            response=DiscordClientResponseStub(self._status_code), message=self._message
+        )
