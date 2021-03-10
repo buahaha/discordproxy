@@ -5,85 +5,115 @@ from discord.errors import NotFound, Forbidden
 import grpc
 
 
-def my_handle_author(self, data):
-    self.author = discord.User(
-        state=MagicMock(spec=discord.state.ConnectionState), data=data
-    )
-
-
-discord.Message._handle_author = my_handle_author
-mock_state = MagicMock(spec=discord.state.ConnectionState)
+mock_state = MagicMock(name="ConnectionState")
+mock_state.store_user = lambda data: discord.User(state=mock_state, data=data)
 CHANNEL_TYPE_GUILD_TEXT = 0
 
-USERS = {
-    1001: discord.User(
-        state=mock_state(),
-        data={
-            "id": 1001,
-            "username": "user-1",
-            "discriminator": "discriminator-1",
-            "avatar": "avatar-1",
-        },
-    ),
-    1002: discord.User(
-        state=mock_state(),
-        data={
-            "id": 1002,
-            "username": "user-2",
-            "discriminator": "discriminator-2",
-            "avatar": "avatar-2",
-        },
-    ),
-    1100: discord.User(
-        state=mock_state(),
-        data={
-            "id": 1100,
-            "username": "user-forbidden",
-            "discriminator": "discriminator-forbidden",
-            "avatar": "avatar-forbidden",
-        },
-    ),
-}
+
+def obj_list_2_dict(obj_list) -> dict:
+    """converts a list of Discord object to a dict with the ID as key"""
+    return {obj.id: obj for obj in obj_list}
+
+
+def obj_dict_by_id(obj_list) -> dict:
+    return {obj["id"]: obj for obj in obj_list}
+
+
+USERS_DATA = [
+    {
+        # this is the bot used by discordproxy on Discord
+        "id": 1001,
+        "username": "my_bot",
+        "discriminator": "my_bot-discriminator",
+        "avatar": "my_bot-avatar",
+        "bot": True,
+    },
+    {
+        "id": 1002,
+        "username": "user-2",
+        "discriminator": "discriminator-2",
+        "avatar": "avatar-2",
+    },
+    {
+        "id": 1100,
+        "username": "user-forbidden",
+        "discriminator": "discriminator-forbidden",
+        "avatar": "avatar-forbidden",
+    },
+]
+USERS_DATA_BY_ID = obj_dict_by_id(USERS_DATA)
+USERS = obj_list_2_dict(
+    [discord.User(state=mock_state, data=data) for data in USERS_DATA]
+)
 USERS_FORBIDDEN = [1100]
-GUILDS = {3001: discord.Guild(data={"id": 3001, "name": "Alpha"}, state=mock_state())}
-CHANNELS = {
-    2001: discord.TextChannel(
-        state=mock_state(),
-        guild=GUILDS[3001],
-        data={
-            "id": 2001,
-            "name": "channel-1",
-            "type": CHANNEL_TYPE_GUILD_TEXT,
-            "position": 1,
-        },
-    ),
-    2002: discord.TextChannel(
-        state=mock_state(),
-        guild=GUILDS[3001],
-        data={
-            "id": 2002,
-            "name": "channel-2",
-            "type": CHANNEL_TYPE_GUILD_TEXT,
-            "position": 2,
-        },
-    ),
-    2010: discord.DMChannel(
-        state=mock_state(),
-        me=False,
-        data={"id": 2010, "recipients": [USERS[1002]]},
-    ),
-    2100: discord.TextChannel(
-        state=mock_state(),
-        guild=GUILDS[3001],
-        data={
-            "id": 2100,
-            "name": "channel-forbidden",
-            "type": CHANNEL_TYPE_GUILD_TEXT,
-            "position": 3,
-        },
-    ),
-}
+GUILDS = obj_list_2_dict(
+    [
+        # this is the current guild
+        discord.Guild(data={"id": 3001, "name": "Alpha"}, state=mock_state)
+    ]
+)
+CHANNELS = obj_list_2_dict(
+    [
+        discord.TextChannel(
+            state=mock_state,
+            guild=GUILDS[3001],
+            data={
+                "id": 2001,
+                "name": "channel-1",
+                "type": CHANNEL_TYPE_GUILD_TEXT,
+                "position": 1,
+            },
+        ),
+        discord.TextChannel(
+            state=mock_state,
+            guild=GUILDS[3001],
+            data={
+                "id": 2002,
+                "name": "channel-2",
+                "type": CHANNEL_TYPE_GUILD_TEXT,
+                "position": 2,
+            },
+        ),
+        discord.DMChannel(
+            state=mock_state,
+            me=False,
+            data={"id": 2010, "recipients": [USERS_DATA_BY_ID[1002]]},
+        ),
+        discord.TextChannel(
+            state=mock_state,
+            guild=GUILDS[3001],
+            data={
+                "id": 2100,
+                "name": "channel-forbidden",
+                "type": CHANNEL_TYPE_GUILD_TEXT,
+                "position": 3,
+            },
+        ),
+    ]
+)
 CHANNELS_FORBIDDEN = [2100]
+ROLES = obj_list_2_dict(
+    [
+        discord.Role(
+            state=mock_state,
+            guild=GUILDS[3001],
+            data={"id": 1, "name": "role-1"},
+        ),
+        discord.Role(
+            state=mock_state,
+            guild=GUILDS[3001],
+            data={"id": 2, "name": "role-2"},
+        ),
+    ]
+)
+MEMBERS_DATA = [{"user": USERS_DATA_BY_ID[1001], "roles": [1, 2]}]
+MEMBERS_DATA_BY_ID = {obj["user"]["id"]: obj for obj in MEMBERS_DATA}
+MEMBERS_LIST = [
+    discord.Member(data=data, guild=GUILDS[3001], state=mock_state)
+    for data in MEMBERS_DATA
+]
+
+MEMBERS = obj_list_2_dict(MEMBERS_LIST)
 
 
 class DiscordClientResponseStub:
@@ -106,28 +136,26 @@ class DiscordChannel:
                 response=DiscordClientResponseStub(403),
                 message="Test:Forbidden channel",
             )
-        return discord.Message(
-            state=mock_state(),
-            channel=self.channel,
-            data={
-                "id": 42,
-                "type": 0,
-                "content": content,
-                "mention_everyone": False,
-                "timestamp": "2021-03-09T18:25:42.081000+00:00",
-                "edited_timestamp": "2021-03-09T18:25:42.081000+00:00",
-                "tts": False,
-                "pinned": False,
-                "attachments": [],
-                "embeds": [],  # TODO: convert embeds to dicts
-                "author": {
-                    "id": 1001,
-                    "username": "user-1",
-                    "discriminator": "discriminator-1",
-                    "avatar": "avatar-1",
-                },
-            },
-        )
+
+        data = {
+            "id": 42,
+            "channel_id": self.channel.id,
+            "type": 0,
+            "content": content,
+            "mention_everyone": False,
+            "timestamp": "2021-03-09T18:25:42.081000+00:00",
+            "edited_timestamp": "2021-03-09T18:25:42.081000+00:00",
+            "tts": False,
+            "pinned": False,
+            "attachments": [],
+            "embeds": [embed.to_dict()] if embed else [],
+            "author": USERS_DATA_BY_ID[1001],
+        }
+        if isinstance(self.channel, discord.TextChannel):
+            data["guild_id"] = self.channel.guild.id
+            data["member"] = MEMBERS_DATA_BY_ID[1001]
+
+        return discord.Message(state=mock_state, channel=self.channel, data=data)
 
 
 class DiscordUser:

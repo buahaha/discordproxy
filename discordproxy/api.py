@@ -9,15 +9,6 @@ from discordproxy import discord_api_pb2_grpc
 from discordproxy import discord_api_pb2
 
 
-def _gen_grpc_details(status: int, code: int, text: str):
-    return {
-        "type": "HTTPException",
-        "status": int(status),
-        "code": int(code),
-        "text": str(text),
-    }
-
-
 def handle_discord_exceptions(Response):
     """converts discord HTTP exceptions into gRPC context"""
 
@@ -39,7 +30,7 @@ def handle_discord_exceptions(Response):
             try:
                 return await func(*args, **kwargs)
             except discord.errors.HTTPException as ex:
-                details = _gen_grpc_details(
+                details = _gen_grpc_error_details(
                     status=ex.status, code=ex.code, text=ex.text
                 )
                 context = args[2]
@@ -52,8 +43,18 @@ def handle_discord_exceptions(Response):
     return wrapper
 
 
+def _gen_grpc_error_details(status: int, code: int, text: str):
+    return {
+        "type": "HTTPException",
+        "status": int(status),
+        "code": int(code),
+        "text": str(text),
+    }
+
+
 def discord_to_grpc_embed(embed) -> discord_api_pb2.Embed:
-    return discord_api_pb2.Embed(**embed.to_dict())
+    embed_dict = embed.to_dict()
+    return json_format.ParseDict(embed_dict, discord_api_pb2.Embed())
 
 
 def discord_to_grpc_role(role) -> discord_api_pb2.Role:
