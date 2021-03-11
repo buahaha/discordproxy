@@ -10,13 +10,11 @@
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #
-from pathlib import Path
+import os
 import sys
 from recommonmark.transform import AutoStructify
 
-package_path = Path(__file__).parent.parent / "discordproxy"
-print(package_path)
-sys.path.insert(0, str(package_path))
+sys.path.insert(0, os.path.split(os.path.dirname(os.path.abspath(__file__)))[0])
 
 
 # -- Project information -----------------------------------------------------
@@ -59,7 +57,7 @@ html_theme = "sphinx_rtd_theme"
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-html_static_path = ["_static"]
+# html_static_path = ["_static"]
 
 # -- Auto sections --
 autosectionlabel_prefix_document = True
