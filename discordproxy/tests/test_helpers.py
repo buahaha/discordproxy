@@ -1,7 +1,7 @@
 import json
 import unittest
 import grpc
-from discordproxy.client import GrpcErrorDetails, parse_error_details
+from discordproxy.helpers import GrpcErrorDetails, parse_error_details
 
 
 class TestParseErrorDetails(unittest.TestCase):

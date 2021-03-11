@@ -7,7 +7,7 @@ from discordproxy.discord_api_pb2 import (
     Embed,
 )
 from discordproxy.discord_api_pb2_grpc import DiscordApiStub
-from discordproxy.client import parse_error_details
+from discordproxy.helpers import parse_error_details
 
 
 def send_channel_message(channel_id):

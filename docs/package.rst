@@ -15,5 +15,5 @@ gRPC classes
 Client helpers
 --------------
 
-.. automodule:: discordproxy.client
+.. automodule:: discordproxy.helpers
     :members:
