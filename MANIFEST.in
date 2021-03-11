@@ -2,3 +2,4 @@ include LICENSE
 include README.md
 recursive-include discordproxy *.py
 recursive-exclude discordproxy/tests *.*
+recursive-include protobufs *.proto

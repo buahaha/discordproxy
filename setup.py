@@ -19,7 +19,7 @@ setup(
     description="Proxy server for accessing the Discord API via gRPC",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://gitlab.com/ErikKalkoken",
+    url="https://gitlab.com/ErikKalkoken/discordproxy",
     author="Erik Kalkoken",
     author_email="kalkoken87@gmail.com",
     classifiers=[

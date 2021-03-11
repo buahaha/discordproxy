@@ -36,6 +36,13 @@ test-38:
   - tox -e py38
   - bash <(curl -s https://codecov.io/bash)
 
+test-39:
+  stage: test
+  image: python:3.9-buster
+  script:
+  - tox -e py39
+  - bash <(curl -s https://codecov.io/bash)
+
 test-docs:
   stage: test
   image: python:3.7-buster
