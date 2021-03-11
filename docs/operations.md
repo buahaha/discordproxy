@@ -8,7 +8,10 @@ This section describes how to install Discord Proxy into an existing Alliance Au
 
 #### Install Discord Proxy
 
-> **Note**<br>This guide assumed a default installation according to the official Auth installation guide.
+```eval_rst
+.. note::
+    This guide assumed a default installation according to the official Auth installation guide.
+```
 
 Login as root user, activate your venv and navigate to your Auth main folder:
 
@@ -39,11 +42,9 @@ stdout_logfile=/home/allianceserver/myauth/log/discordproxyserver.out
 stderr_logfile=/home/allianceserver/myauth/log/discordproxyserver.err
 ```
 
-Add discordproxy to the myauth group:
-
-```ini
-[group:myauth]
-programs=beat,worker,gunicorn,discordproxy
+```eval_rst
+.. note::
+    We do not recommend adding discordproxy to your myauth group, since it does not require to be restarted after myauth configuration changes like the other programs in that group.
 ```
 
 Reload supervisor to activate the changes and start Discord Proxy:

@@ -69,4 +69,4 @@ def get_channels(guild_id):
 
 if __name__ == "__main__":
     # send_direct_message(1223)  # 152878250039705600
-    send_channel_message(123)  # 795663934463148052
+    send_channel_message(795663934463148052)  # 795663934463148052

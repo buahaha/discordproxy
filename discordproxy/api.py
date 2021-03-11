@@ -1,55 +1,10 @@
-import functools
-
 import discord
 from google.protobuf import json_format
-import grpc
-import json
+
 
 from discordproxy import discord_api_pb2_grpc
 from discordproxy import discord_api_pb2
-
-
-def handle_discord_exceptions(Response):
-    """converts discord HTTP exceptions into gRPC context"""
-
-    _CODES_MAPPING = {
-        400: grpc.StatusCode.INVALID_ARGUMENT,
-        401: grpc.StatusCode.UNAUTHENTICATED,
-        403: grpc.StatusCode.PERMISSION_DENIED,
-        404: grpc.StatusCode.NOT_FOUND,
-        405: grpc.StatusCode.INVALID_ARGUMENT,
-        429: grpc.StatusCode.RESOURCE_EXHAUSTED,
-        500: grpc.StatusCode.INTERNAL,
-        502: grpc.StatusCode.UNAVAILABLE,
-        504: grpc.StatusCode.DEADLINE_EXCEEDED,
-    }
-
-    def wrapper(func):
-        @functools.wraps(func)
-        async def decorated(*args, **kwargs):
-            try:
-                return await func(*args, **kwargs)
-            except discord.errors.HTTPException as ex:
-                details = _gen_grpc_error_details(
-                    status=ex.status, code=ex.code, text=ex.text
-                )
-                context = args[2]
-                context.set_code(_CODES_MAPPING.get(ex.status, grpc.StatusCode.UNKNOWN))
-                context.set_details(json.dumps(details))
-                return Response()
-
-        return decorated
-
-    return wrapper
-
-
-def _gen_grpc_error_details(status: int, code: int, text: str):
-    return {
-        "type": "HTTPException",
-        "status": int(status),
-        "code": int(code),
-        "text": str(text),
-    }
+from discordproxy.decorators import handle_discord_exceptions, log_request
 
 
 def discord_to_grpc_embed(embed) -> discord_api_pb2.Embed:
@@ -154,6 +109,7 @@ class DiscordApi(discord_api_pb2_grpc.DiscordApiServicer):
         super().__init__()
         self.discord_client = discord_client
 
+    @log_request
     @handle_discord_exceptions(discord_api_pb2.SendChannelMessageResponse)
     async def SendChannelMessage(self, request, context):
         channel = await self.discord_client.fetch_channel(channel_id=request.channel_id)
@@ -162,6 +118,7 @@ class DiscordApi(discord_api_pb2_grpc.DiscordApiServicer):
             message=discord_to_grpc_message(message)
         )
 
+    @log_request
     @handle_discord_exceptions(discord_api_pb2.SendDirectMessageResponse)
     async def SendDirectMessage(self, request, context):
         user = await self.discord_client.fetch_user(user_id=request.user_id)
@@ -179,6 +136,7 @@ class DiscordApi(discord_api_pb2_grpc.DiscordApiServicer):
             kwargs["embed"] = discord.Embed.from_dict(embed_dct)
         return await channel.send(**kwargs)
 
+    @log_request
     @handle_discord_exceptions(discord_api_pb2.GetGuildChannelsResponse)
     async def GetGuildChannels(self, request, context):
         guild = await self.discord_client.fetch_guild(request.guild_id)
