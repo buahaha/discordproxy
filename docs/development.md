@@ -2,7 +2,12 @@
 
 ## Client example
 
-Here is a code example for a gRPC client that is sending a direct message to the user with ID 123:
+Here is a hello code example for a gRPC client that is sending a direct "hello world" message to a user:
+
+```eval_rst
+.. hint::
+    To test this script please replace the user ID with your own. Here is how you can find IDs on your Discord server: `Where can I find my User/Server/Message ID? <https://support.discord.com/hc/en-us/articles/206346498-Where-can-I-find-my-User-Server-Message-ID->`_
+```
 
 ```python
 import grpc
@@ -15,7 +20,7 @@ with grpc.insecure_channel("localhost:50051") as channel:
     # create a client for the DiscordApi service
     client = DiscordApiStub(channel)
     # create a request to use the DirectMessageRequest method of the service
-    request = DirectMessageRequest(user_id=123, content="This is the way")
+    request = DirectMessageRequest(user_id=123456789, content="Hello, world!")
     # send the request to Discord Proxy
     client.SendDirectMessage(request)
 
@@ -81,7 +86,29 @@ Legend:
 - `code`: JSON error code
 - `text`: Error message
 
-> **Note**<br>For most cases it should be sufficient to deal with the status code. The JSON error code is only needed in some special cases.
+```eval_rst
+.. note::
+    For most cases it should be sufficient to deal with the status code. The JSON error code is only needed in some special cases.
+```
+
+To simplify dealing with the JSON error objects you can also use this helper from the djangoproxy package, which will parse the details and return them as handy named tuple:
+
+```python
+from discordproxy.helpers import parse_error_details
+
+try:
+    client.SendDirectMessage(request)
+except grpc.RpcError as e:
+    details = parse_error_details(e)
+    print(f"HTTP response code: {details.status}")
+    print(f"JSON error code: {details.code}")
+    print(f"Discord error message: {details.text}")
+```
+
+```eval_rst
+.. seealso::
+    For the documentation of all helpers see: :ref:`package:Client Helpers`
+```
 
 ## Timeouts
 
