@@ -45,7 +45,7 @@ def _parse_args(args_list: list) -> argparse.ArgumentParser:
         "--log-level",
         default="INFO",
         help="Log level of log file",
-        choices=["INFO", "WARN", "ERROR", "CRITICAL"],
+        choices=["DEBUG", "INFO", "WARN", "ERROR", "CRITICAL"],
     )
     my_arg_parser.add_argument(
         "--log-file-path",
@@ -96,6 +96,11 @@ def _logging_config(my_args) -> dict:
         },
         "loggers": {
             "": {  # root logger
+                "handlers": ["console", "file"],
+                "level": "DEBUG",
+                "propagate": False,
+            },
+            "discord": {  # discord.py library
                 "handlers": ["console", "file"],
                 "level": "DEBUG",
                 "propagate": False,
