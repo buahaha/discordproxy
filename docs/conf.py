@@ -10,10 +10,13 @@
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #
-import os
+from pathlib import Path
 import sys
+from recommonmark.transform import AutoStructify
 
-sys.path.insert(0, os.path.split(os.path.dirname(os.path.abspath(__file__)))[0])
+package_path = Path(__file__).parent.parent / "discordproxy"
+print(package_path)
+sys.path.insert(0, str(package_path))
 
 
 # -- Project information -----------------------------------------------------
@@ -33,6 +36,7 @@ extensions = [
     "sphinx_markdown_tables",
     "sphinx.ext.autodoc",
     "sphinx_rtd_theme",
+    "sphinx.ext.autosectionlabel",
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -56,3 +60,20 @@ html_theme = "sphinx_rtd_theme"
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ["_static"]
+
+# -- Auto sections --
+autosectionlabel_prefix_document = True
+
+
+# -- AutoStructify --
+
+
+def setup(app):
+    app.add_config_value(
+        "recommonmark_config",
+        {
+            "auto_toc_tree_section": "Contents",
+        },
+        True,
+    )
+    app.add_transform(AutoStructify)

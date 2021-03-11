@@ -1,8 +1,8 @@
 # Developer Guide
 
-## Example
+## Client example
 
-Here is a simple example for sending a direct message to user with ID 123 (without error handling):
+Here is a code example for a gRPC client that is sending a direct message to the user with ID 123:
 
 ```python
 import grpc
@@ -10,10 +10,13 @@ import grpc
 from discordproxy.discord_api_pb2 import DirectMessageRequest
 from discordproxy.discord_api_pb2_grpc import DiscordApiStub
 
-
+# opens a channel to Discord Proxy
 with grpc.insecure_channel("localhost:50051") as channel:
+    # create a client for the DiscordApi service
     client = DiscordApiStub(channel)
+    # create a request to use the DirectMessageRequest method of the service
     request = DirectMessageRequest(user_id=123, content="This is the way")
+    # send the request to Discord Proxy
     client.SendDirectMessage(request)
 
 ```
@@ -25,12 +28,20 @@ If a gRPC request fails a `grpc.RpcError` exception will be raised. RPC errors r
 - `code`: the [gRPC status code](https://grpc.github.io/grpc/core/md_doc_statuscodes.html)
 - `details`: a string with additional details about the error.
 
-The [Discord API](https://discord.com/developers/docs/topics/opcodes-and-status-codes) will return two types of error codes:
+The most common errors you can except will be originating from calls to the Discord API. e.g. if a user is no longer a member of the guild the Discord API will return a http response code 404. Discord Proxy will map all HTTP response codes from Discord to a gRPC status codes and raise a gRPC error exceptions (see also [gRPC status codes](#gRPC-status-codes)). In addition the details field of that exception will contain the full error information as JSON object (see also [gRPC details](#gRPC-details)).
 
-- HTTP response code (e.g. 404 if a request user does not exist)
-- JSON error code (e.g. 30007 when the maximum number of webhooks is reached )
+### Code Example
 
-Discord Proxy will map the HTTP response code from Discord to a gRPC status codes. In addition the details field will contain the full error information as JSON object.
+Here is an example on how to catch and process an error exception from your gRPC calls:
+
+```python
+try:
+    client.SendDirectMessage(request)
+except grpc.RpcError as e:
+    # print error code and details
+    print(f"Code: {e.code()}")
+    print(f"Details: {e.details()}")
+```
 
 ### gRPC status codes
 
@@ -48,7 +59,12 @@ HTTP response code | gRPC status code
 
 ### gRPC details
 
-gRPC exceptions have a code and a detail property. Discord errors will always have `code = grpc.StatusCode.ABORTED` and contain the actual Discord error in the detail property as JSON object, e.g.:
+The [Discord API](https://discord.com/developers/docs/topics/opcodes-and-status-codes) will return two types of error codes:
+
+- HTTP response code (e.g. 404 if a request user does not exist)
+- JSON error code (e.g. 30007 when the maximum number of webhooks is reached )
+
+In addition the response may contain some additional error text. All that information will be encoded as JSON in the details attribute of the gRPC error exception. Here is an example:
 
 ```json
 {
@@ -65,23 +81,11 @@ Legend:
 - `code`: JSON error code
 - `text`: Error message
 
-### Example
-
-Here is an example on how to get details for errors from your gRPC calls:
-
-```python
-try:
-    client.SendDirectMessage(request)
-except grpc.RpcError as e:
-    print(f"Code: {e.code()}")
-    print(f"Details: {e.details()}")
-```
-
 > **Note**<br>For most cases it should be sufficient to deal with the status code. The JSON error code is only needed in some special cases.
 
 ## Timeouts
 
-All requests are synchronous and sometimes it can take a few seconds for a request to complete due to Discord rate limiting. However, they might be issues with the network or the Discord API, which might case requests to go on for a long time. In order to build a robust application we recommend to use sensible timeouts with all requests. Note that this timeout must cover the complete duration it takes for a request to compete and should therefore not be set too short.
+All requests are synchronous and sometimes it can take a few seconds for a request to complete due to Discord rate limiting. However, they might be issues with the network or the Discord API, which might case requests to go on for a long time (the hard timeout on the client side is about 30 minutes). In order to build a robust application we recommend to use sensible timeouts with all requests. Note that this timeout must cover the complete duration it takes for a request to compete and should therefore not be set too short.
 
 Here is how to use timeout with requests to the Discord Proxy. All timeouts are in seconds:
 

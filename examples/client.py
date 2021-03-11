@@ -7,6 +7,7 @@ from discordproxy.discord_api_pb2 import (
     Embed,
 )
 from discordproxy.discord_api_pb2_grpc import DiscordApiStub
+from discordproxy.client import parse_error_details
 
 
 def send_channel_message(channel_id):
@@ -26,7 +27,7 @@ def send_channel_message(channel_id):
             message = client.SendChannelMessage(request)
         except grpc.RpcError as e:
             print(f"Code: {e.code()}")
-            print(f"Details: {e.details()}")
+            print(f"Details: {parse_error_details(e)}")
         else:
             print(message)
 
@@ -67,5 +68,5 @@ def get_channels(guild_id):
 
 
 if __name__ == "__main__":
-    # send_direct_message(152878250039705600)  # 152878250039705600
-    send_channel_message(795663934463148052)
+    # send_direct_message(1223)  # 152878250039705600
+    send_channel_message(123)  # 795663934463148052
