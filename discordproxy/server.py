@@ -20,8 +20,15 @@ async def shutdown_server(signal, server, discord_client):
     logger.info("Received shutdown signal: %s", signal)
     logger.info("Logging out from Discord...")
     await discord_client.logout()
-    logger.info("Shutting down gRPC server...")
+    logger.info("Shutting down gRPC service...")
     await server.stop(0)
+    # cancel all outstanding tasks (if any)
+    tasks = [t for t in asyncio.all_tasks() if t is not asyncio.current_task()]
+    if tasks:
+        for task in tasks:
+            task.cancel()
+        logger.info(f"Cancelling {len(tasks)} outstanding tasks")
+        await asyncio.gather(*tasks, return_exceptions=True)
 
 
 async def run_server(token: str, my_args) -> None:
@@ -37,17 +44,19 @@ async def run_server(token: str, my_args) -> None:
     for s in signals:
         loop.add_signal_handler(
             s,
-            lambda s=s: asyncio.create_task(shutdown_server(s, server, discord_client)),
+            lambda s=s: asyncio.ensure_future(
+                shutdown_server(s, server, discord_client)
+            ),
         )
 
     # start the server
-    msg = f"Starting gRPC server on {listen_addr}"
+    msg = f"Starting gRPC service on {listen_addr}"
     logger.info("%s", msg)
     print(msg)
     await server.start()
     asyncio.ensure_future(discord_client.start(token))
     await server.wait_for_termination()
-    msg = "gRPC server has shut down"
+    msg = "gRPC service has shut down"
     logger.info("%s", msg)
     print(msg)
 
@@ -57,7 +66,13 @@ def main():
     print(f"{__title__} v{__version__}")
     print()
     token, my_args = setup_server(sys.argv[1:])
-    asyncio.run(run_server(token=token, my_args=my_args))
+    # asyncio.run(run_server(token=token, my_args=my_args))
+    loop = asyncio.get_event_loop()
+    try:
+        loop.run_until_complete(run_server(token=token, my_args=my_args))
+    finally:
+        logger.info("Successfully shutdown server")
+        loop.close()
 
 
 if __name__ == "__main__":
