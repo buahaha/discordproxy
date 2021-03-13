@@ -134,7 +134,8 @@ To configure your server just add/modify one of the below parameters in the resp
 
 ```text
 usage: discordproxyserver [-h] [--token TOKEN] [--host HOST] [--port PORT]
-                          [--log-level {INFO,WARN,ERROR,CRITICAL}]
+                          [--log-console-level {DEBUG,INFO,WARN,ERROR,CRITICAL}]
+                          [--log-file-level {DEBUG,INFO,WARN,ERROR,CRITICAL}]
                           [--log-file-path LOG_FILE_PATH] [--version]
 
 Server with HTTP API for sending messages to Discord
@@ -146,7 +147,9 @@ optional arguments:
                         None)
   --host HOST           server host address (default: 127.0.0.1)
   --port PORT           server port (default: 50051)
-  --log-level {INFO,WARN,ERROR,CRITICAL}
+  --log-console-level {DEBUG,INFO,WARN,ERROR,CRITICAL}
+                        Log level of log file (default: CRITICAL)
+  --log-file-level {DEBUG,INFO,WARN,ERROR,CRITICAL}
                         Log level of log file (default: INFO)
   --log-file-path LOG_FILE_PATH
                         Path for storing the log file. If no path if provided,

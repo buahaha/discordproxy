@@ -1,7 +1,5 @@
 # discordproxy
 
-> **THIS IS WORK-IN-PROGRESS** - Not released for production use yet
-
 Proxy server for accessing the Discord API via gRPC
 
 [![release](https://img.shields.io/pypi/v/discordproxy?label=release)](https://pypi.org/project/discordproxy/)

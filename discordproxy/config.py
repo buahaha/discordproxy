@@ -42,7 +42,13 @@ def _parse_args(args_list: list) -> argparse.ArgumentParser:
         "--port", type=int, default=constants.DEFAULT_PORT, help="server port"
     )
     my_arg_parser.add_argument(
-        "--log-level",
+        "--log-console-level",
+        default="CRITICAL",
+        help="Log level of log file",
+        choices=["DEBUG", "INFO", "WARN", "ERROR", "CRITICAL"],
+    )
+    my_arg_parser.add_argument(
+        "--log-file-level",
         default="INFO",
         help="Log level of log file",
         choices=["DEBUG", "INFO", "WARN", "ERROR", "CRITICAL"],
@@ -81,17 +87,18 @@ def _logging_config(my_args) -> dict:
         },
         "handlers": {
             "console": {
-                "level": "CRITICAL",
+                "level": my_args.log_console_level,
                 "formatter": "console",
                 "class": "logging.StreamHandler",
                 "stream": "ext://sys.stdout",  # Default is stderr
             },
             "file": {
-                "level": my_args.log_level,
+                "level": my_args.log_file_level,
                 "formatter": "file",
-                "class": "logging.FileHandler",
+                "class": "logging.handlers.RotatingFileHandler",
                 "filename": str(filename),
-                "mode": "a",
+                "maxBytes": 1024 * 1024 * 10,
+                "backupCount": 10,
             },
         },
         "loggers": {

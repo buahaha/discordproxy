@@ -33,7 +33,8 @@ class TestSetupServer(unittest.TestCase):
         self.assertEqual(my_args.token, "abc")
         self.assertEqual(my_args.host, constants.DEFAULT_HOST)
         self.assertEqual(my_args.port, constants.DEFAULT_PORT)
-        self.assertEqual(my_args.log_level, "INFO")
+        self.assertEqual(my_args.log_file_level, "INFO")
+        self.assertEqual(my_args.log_console_level, "CRITICAL")
         self.assertIsNone(my_args.log_file_path)
 
     def test_should_set_log_file_path_to_cwd(self):

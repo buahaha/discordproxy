@@ -69,7 +69,12 @@ def log_request(func):
     """Logs every request"""
 
     async def decorated(self, request, context):
-        logger.debug("Received request: %s\n%s", func.__name__, request)
+        logger.info(
+            "Received request: %s: %s{\n%s}",
+            func.__name__,
+            type(request).__name__,
+            str(request),
+        )
         return await func(self, request, context)
 
     return decorated

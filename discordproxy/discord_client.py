@@ -15,4 +15,4 @@ class DiscordClient(discord.Client):
         logger.info("%s as logged in successfully", self.user.name)
 
     async def on_disconnect(self):
-        logger.info("%s has disconnected from Discord", self.user.name)
+        logger.info("Client has disconnected from Discord")
