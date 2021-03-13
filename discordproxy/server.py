@@ -12,6 +12,11 @@ from discordproxy.api import DiscordApi
 from discordproxy.config import setup_server
 from discordproxy.discord_client import DiscordClient
 
+try:
+    from asyncio import run as asyncio_run
+except ImportError:
+    from discordproxy.runners import run as asyncio_run
+
 logger = logging.getLogger(__name__)
 discord.VoiceClient.warn_nacl = False
 
@@ -22,13 +27,6 @@ async def shutdown_server(signal, server, discord_client):
     await discord_client.logout()
     logger.info("Shutting down gRPC service...")
     await server.stop(0)
-    # cancel all outstanding tasks (if any)
-    tasks = [t for t in asyncio.all_tasks() if t is not asyncio.current_task()]
-    if tasks:
-        for task in tasks:
-            task.cancel()
-        logger.info(f"Cancelling {len(tasks)} outstanding tasks")
-        await asyncio.gather(*tasks, return_exceptions=True)
 
 
 async def run_server(token: str, my_args) -> None:
@@ -50,29 +48,17 @@ async def run_server(token: str, my_args) -> None:
         )
 
     # start the server
-    msg = f"Starting gRPC service on {listen_addr}"
-    logger.info("%s", msg)
-    print(msg)
+    logger.info("Starting gRPC service on {listen_addr}")
     await server.start()
     asyncio.ensure_future(discord_client.start(token))
     await server.wait_for_termination()
-    msg = "gRPC service has shut down"
-    logger.info("%s", msg)
-    print(msg)
+    logger.info("gRPC service has shut down")
 
 
 def main():
     logger.info(f"Starting {__title__} v{__version__}...")
-    print(f"{__title__} v{__version__}")
-    print()
     token, my_args = setup_server(sys.argv[1:])
-    # asyncio.run(run_server(token=token, my_args=my_args))
-    loop = asyncio.get_event_loop()
-    try:
-        loop.run_until_complete(run_server(token=token, my_args=my_args))
-    finally:
-        logger.info("Successfully shutdown server")
-        loop.close()
+    asyncio_run(run_server(token=token, my_args=my_args))
 
 
 if __name__ == "__main__":
