@@ -19,10 +19,10 @@ Login as root user, activate your venv and navigate to your Auth main folder:
 cd /home/allianceserver/myauth
 ```
 
-Install discordproxy from the repo into the venv:
+Install discordproxy from PyPI into the venv:
 
 ```bash
-pip install git+https://gitlab.com/ErikKalkoken/discordproxy.git
+pip install discordproxy
 ```
 
 Add Discord Proxy to your supervisor configuration for Auth.
@@ -96,10 +96,10 @@ pip install -U pip
 pip install wheel setuptools
 ```
 
-Install discordproxy from the repo into the venv:
+Install discordproxy from PyPI into the venv:
 
 ```bash
-pip install git+https://gitlab.com/ErikKalkoken/discordproxy.git
+pip install discordproxy
 ```
 
 #### Add discordproxy to supervisor
